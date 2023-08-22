@@ -2,37 +2,29 @@
 <% max_width = "xl" %>
 
 <LandingPage.hero
-  image_src={~p"/images/landing_page/hero.svg"}
-  logo_cloud_title={gettext("Trusted by brands all over the world")}
+  image_src={~p"/images/landing_page/ted.jpeg"}
+  logo_cloud_title={gettext("Trusted by brands all over the world*")}
   max_width={max_width}
 >
   <:title>
-    <span><%= gettext("The secret of") %></span>
+    <span><%= gettext("Thomas") %></span>
     <span class="text-primary-600">
-      <%= gettext("getting ahead") %>
+      <%= gettext("Full Stack Engineer") %>
     </span>
-    <span><%= gettext("is getting started") %>.</span>
+    <span><%= gettext("Edwards") %></span>
   </:title>
   <:action_buttons>
     <.button
-      label={gettext("Get started")}
+      label={gettext("Get in touch")}
       link_type="a"
       color="primary"
       to={~p"/auth/register"}
       size="lg"
     />
-
-    <.button
-      label={gettext("Guide")}
-      link_type="a"
-      color="white"
-      to="https://docs.petal.build"
-      size="lg"
-    />
   </:action_buttons>
   <:description>
     <%= gettext(
-      "Adapt this landing page template to your own web application. Now you can make your next great web app in record time."
+      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, React Native, and the PETAL stack"
     ) %>
   </:description>
   <:cloud_logo>
@@ -211,16 +203,16 @@
 </LandingPage.hero>
 
 <LandingPage.features
-  title={gettext("Features")}
-  description={gettext("Here are some features you can use to get started with your web app.")}
+  title={gettext("Projects")}
+  description={gettext("Here are a few projects I have built using Elixir and LiveView")}
   features={[
     %{
-      title: "Authentication",
+      title: "Ad Astra",
       description: Faker.Lorem.sentence(10..20),
       icon: :bolt
     },
     %{
-      title: "HTML Emails",
+      title: "AIDA",
       description: Faker.Lorem.sentence(10..20),
       icon: :puzzle_piece
     },
@@ -287,52 +279,4 @@
       }
     end)
   }
-/>
-
-<LandingPage.pricing
-  title={gettext("Pricing")}
-  description={gettext("Simple, transparent pricing that adapts to the size of your company.")}
-  plans={[
-    %{
-      name: "Essential",
-      price: "49",
-      description: Faker.Lorem.sentence(8..10),
-      sign_up_path: "/",
-      features: [
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10)
-      ]
-    },
-    %{
-      name: "Pro",
-      price: "149",
-      description: Faker.Lorem.sentence(8..10),
-      sign_up_path: "/",
-      features: [
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10)
-      ]
-    },
-    %{
-      name: "Enterprise",
-      price: "999",
-      description: Faker.Lorem.sentence(8..10),
-      sign_up_path: "/",
-      features: [
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10),
-        Faker.Lorem.sentence(4..10)
-      ]
-    }
-  ]}
-  max_width={max_width}
 />

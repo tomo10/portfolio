@@ -20,17 +20,15 @@ import Config
 #   - github_url: (deletable) The URL to your Github account (used in the landing page footer)
 #   - discord_url: (deletable) The URL to your Discord invititation (used in the landing page footer)
 config :portfolio,
-  app_name: "Petal",
-  business_name: "Petal Pty Ltd",
-  support_email: "support@example.com",
-  mailer_default_from_name: "Support",
-  mailer_default_from_email: "support@example.com",
+  app_name: "Portfolio",
+  business_name: "Thomas Edwards Dev",
+  support_email: "thce28@gmail.com",
+  mailer_default_from_name: "Contact",
+  mailer_default_from_email: "thce28@gmail.com",
   logo_url_for_emails:
     "https://res.cloudinary.com/wickedsites/image/upload/v1643336799/petal/petal_logo_light_w5jvlg.png",
   seo_description: "SaaS boilerplate template powered by Elixir's Phoenix and TailwindCSS",
-  twitter_url: "https://twitter.com/PetalFramework",
-  github_url: "https://github.com/petalframework",
-  discord_url: "https://discord.gg/exbwVbjAct"
+  github_url: "https://github.com/tomo10"
 
 # Petal Pro features:
 #   - impersonation_enabled?: Allows admins to impersonate users

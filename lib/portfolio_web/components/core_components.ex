@@ -27,10 +27,9 @@ defmodule PortfolioWeb.CoreComponents do
 
     ~H"""
     <%= if Enum.member?(["light", "dark"], @variant) do %>
-      <img class={@class} src={~p"/images/#{@logo_file}"} />
+      <p class="font-sans hover:font-serif">THCE</p>
     <% else %>
-      <img class={@class <> " block dark:hidden"} src={~p"/images/logo_dark.svg"} />
-      <img class={@class <> " hidden dark:block"} src={~p"/images/logo_light.svg"} />
+      <p class="font-sans hover:font-serif">THCE</p>
     <% end %>
     """
   end
@@ -45,10 +44,9 @@ defmodule PortfolioWeb.CoreComponents do
 
     ~H"""
     <%= if Enum.member?(["light", "dark"], @variant) do %>
-      <img class={@class} src={~p"/images/#{@logo_file}"} />
+      <p>THCE</p>
     <% else %>
-      <img class={@class <> " block dark:hidden"} src={~p"/images/logo_icon_dark.svg"} />
-      <img class={@class <> " hidden dark:block"} src={~p"/images/logo_icon_light.svg"} />
+      <p>THCE</p>
     <% end %>
     """
   end

@@ -101,7 +101,7 @@ defmodule PortfolioWeb.Components.LandingPage do
   def features(assigns) do
     ~H"""
     <section
-      id="features"
+      id="projects"
       class="relative z-10 py-16 text-center transition duration-500 ease-in-out bg-white md:py-32 dark:bg-gray-900 dark:text-white"
     >
       <.container max_width={@max_width} class="relative z-10">
@@ -317,92 +317,6 @@ defmodule PortfolioWeb.Components.LandingPage do
   attr :plans, :list,
     doc:
       "List of maps with keys: :most_popular (bool), :name, :currency, :price, :unit, :description, :features (list of strings)"
-
-  def pricing(assigns) do
-    ~H"""
-    <section
-      id="pricing"
-      class="py-24 text-gray-700 transition duration-500 ease-in-out md:py-32 dark:bg-gray-800 bg-gray-50 dark:text-white stagger-fade-in-animation"
-    >
-      <.container max_width={@max_width}>
-        <div class="mx-auto mb-16 text-center md:mb-20 lg:w-7/12 ">
-          <div class="mb-5 text-3xl font-bold md:mb-7 md:text-5xl fade-in-animation">
-            <%= @title %>
-          </div>
-          <div class="text-lg font-light anim md:text-2xl fade-in-animation">
-            <%= @description %>
-          </div>
-        </div>
-
-        <div class="grid items-start max-w-sm gap-8 mx-auto lg:grid-cols-3 lg:gap-6 lg:max-w-none">
-          <%= for plan <- @plans do %>
-            <.pricing_table {plan} />
-          <% end %>
-        </div>
-      </.container>
-    </section>
-    """
-  end
-
-  attr :most_popular, :boolean, default: false
-  attr :currency, :string, default: "$"
-  attr :unit, :string, default: "/m"
-  attr :name, :string, required: true
-  attr :price, :string, required: true
-  attr :description, :string, required: true
-  attr :features, :list, default: []
-  attr :button_label, :string, default: "Start free trial"
-
-  def pricing_table(assigns) do
-    ~H"""
-    <div class="relative flex flex-col h-full p-6 transition duration-500 ease-in-out bg-gray-200 rounded-lg dark:bg-gray-900 fade-in-animation">
-      <%= if @most_popular do %>
-        <div class="absolute top-0 right-0 mr-6 -mt-4">
-          <div class="inline-flex px-3 py-1 mt-px text-sm font-semibold text-green-600 bg-green-200 rounded-full">
-            Most Popular
-          </div>
-        </div>
-      <% end %>
-
-      <div class="pb-4 mb-4 transition duration-500 ease-in-out border-b border-gray-300 dark:border-gray-700">
-        <div class="mb-1 text-2xl font-bold leading-snug tracking-tight dark:text-primary-500 text-primary-600">
-          <%= @name %>
-        </div>
-
-        <div class="inline-flex items-baseline mb-2">
-          <span class="text-2xl font-medium text-gray-600 dark:text-gray-400">
-            <%= @currency %>
-          </span>
-          <span class="text-3xl font-extrabold leading-tight text-gray-900 transition duration-500 ease-in-out dark:text-white">
-            <%= @price %>
-          </span>
-          <span class="font-medium text-gray-600 dark:text-gray-400"><%= @unit %></span>
-        </div>
-
-        <div class="text-gray-600 dark:text-gray-400">
-          <%= @description %>
-        </div>
-      </div>
-
-      <div class="mb-3 font-medium text-gray-700 dark:text-gray-200">
-        Features include:
-      </div>
-
-      <ul class="-mb-3 text-gray-600 dark:text-gray-400 grow">
-        <%= for feature <- @features do %>
-          <li class="flex items-center mb-3">
-            <.icon name={:check} class="w-3 h-3 mr-3 text-green-500 fill-current shrink-0" />
-            <span><%= feature %></span>
-          </li>
-        <% end %>
-      </ul>
-
-      <div class="p-3 mt-6 ">
-        <.button link_type="a" to={@sign_up_path} class="w-full" label={@button_label} />
-      </div>
-    </div>
-    """
-  end
 
   def load_js_animations(assigns) do
     ~H"""

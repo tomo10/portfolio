@@ -24,7 +24,7 @@ config :portfolio, PortfolioWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   # SETUP_TODO: regenerate and replace this secret_key_base with `mix phx.gen.secret`
-  secret_key_base: "47TFd8fpLTZROcN4Lxz/OQ5fz4hVFMNCsSxHKwSrRGZGxDcWKyGH+1uxAtGYn1/Q",
+  secret_key_base: "F8XDX1h1a7b8hccDSDG9WJgFPeAgDvRbMbpnsv2eFaEzW4cUXMX81Z4v/oTade48",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
