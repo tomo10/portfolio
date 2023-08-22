@@ -1,0 +1,7 @@
+{
+  "skip_files": [
+    "test/support",
+    "lib/petal_pro_web/endpoint.ex",
+    "lib/petal_pro_web/gettext.ex"
+  ]
+}
