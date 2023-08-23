@@ -123,7 +123,9 @@ defmodule PortfolioWeb.Components.LandingPage do
                 </span>
               </div>
               <div class="mb-2 text-lg font-medium md:text-2xl">
-                <%= feature.title %>
+                <.link patch="/ad-astra">
+                  <%= feature.title %>
+                </.link>
               </div>
               <p class="font-light leading-normal md:text-lg">
                 <%= feature.description %>

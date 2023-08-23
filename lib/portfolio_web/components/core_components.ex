@@ -27,9 +27,9 @@ defmodule PortfolioWeb.CoreComponents do
 
     ~H"""
     <%= if Enum.member?(["light", "dark"], @variant) do %>
-      <p class="font-sans hover:font-serif">THCE</p>
+      <p class="font-sans hover:bold">THCE</p>
     <% else %>
-      <p class="font-sans hover:font-serif">THCE</p>
+      <p class="font-sans hover:bold">THCE</p>
     <% end %>
     """
   end
