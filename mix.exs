@@ -95,7 +95,6 @@ defmodule Portfolio.MixProject do
 
       # Utils
       {:blankable, "~> 1.0.0"},
-      {:currency_formatter, "~> 0.4"},
       {:timex, "~> 3.7", override: true},
       {:inflex, "~> 2.1.0"},
       {:slugify, "~> 1.3"},
@@ -104,6 +103,10 @@ defmodule Portfolio.MixProject do
       # HTTP client
       {:tesla, "~> 1.7.0"},
       {:finch, "~> 0.14"},
+
+      # HTTP libs for ad_astra
+      {:httpoison, "~> 2.1"},
+      {:poison, "~> 5.0"},
 
       # Testing
       {:wallaby, "~> 0.30", runtime: false, only: :test},
