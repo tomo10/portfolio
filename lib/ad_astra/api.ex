@@ -9,7 +9,12 @@ defmodule AdAstra.Api do
       |> HTTPoison.get(@api_key)
       |> handle_response()
 
-    extract_value_from_star("declination", res)
+    %{
+      name: extract_value_from_star("name", res),
+      declination: extract_value_from_star("declination", res),
+      right_ascension: extract_value_from_star("right_ascension", res),
+      distance_light_year: extract_value_from_star("distance_light_year", res)
+    }
   end
 
   def ninja_url(star) do

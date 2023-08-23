@@ -1,4 +1,5 @@
 defmodule AdAstra.Stars do
+  alias AdAstra.Stars.Star
   use Agent
 
   @doc """
@@ -29,5 +30,12 @@ defmodule AdAstra.Stars do
   """
   def delete(bucket, key) do
     Agent.get_and_update(bucket, &Map.pop(&1, key))
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking star chagnes
+  """
+  def change_star(%Star{} = star, attrs \\ %{}) do
+    Star.changeset(star, attrs)
   end
 end
