@@ -14,15 +14,17 @@ defmodule PortfolioWeb.AdAstraLive do
   @impl true
   def handle_event("save", %{"star" => star_params}, socket) do
     star1 = Api.fetch(star_params["star1"])
-    # star2 = Api.fetch(star_params["star2"])
+    star2 = Api.fetch(star_params["star2"])
 
     socket =
       socket
       |> assign(:form, to_form(Stars.change_star(%Star{})))
       |> assign(:star1, star1)
-
-    # |> assign(:star2, star2)
+      |> assign(:star2, star2)
 
     {:noreply, socket}
+  end
+
+  def handle_event("calculate", _, socket) do
   end
 end

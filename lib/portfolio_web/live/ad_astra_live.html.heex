@@ -1,38 +1,45 @@
-<.layout current_page={:ad_astra} current_user={@current_user} type="sidebar">
-  <.container class="py-16">
-    <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
-    <.h4>Please type in the name of your first star</.h4>
+<.container class="py-16">
+  <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
+  <.h4>Please type in the name of your first star</.h4>
 
-    <div class="px-4 py-8 sm:px-0">
-      <.form for={@form} phx-submit="save">
-        <.field
-          required
-          field={@form[:star1]}
-          placeholder="Name"
-          phx-debounce="blur"
-          label="Star 1"
-        />
-        <%!-- <.field
-          required
-          field={@form[:star2]}
-          placeholder="Name"
-          phx-debounce="blur"
-          label="Star 2"
-        /> --%>
-        <div class="flex justify-end">
-          <.button>Submit</.button>
-        </div>
-      </.form>
+  <div class="px-4 py-8 sm:px-0">
+    <.form for={@form} phx-submit="save">
+      <.field
+        required
+        field={@form[:star1]}
+        placeholder="Name"
+        phx-debounce="blur"
+        label="Star 1"
+      />
+      <.field
+        required
+        field={@form[:star2]}
+        placeholder="Name"
+        phx-debounce="blur"
+        label="Star 2"
+      />
+      <div class="flex justify-end">
+        <.button>Submit</.button>
+      </div>
+    </.form>
+    <div :if={@star2.name != nil} class="flex flex-row justify-around">
       <div :if={@star1.name != nil}>
         <.h4>Star 1: <%= @star1.name %></.h4>
         <p>Right ascension: <%= @star1.right_ascension %></p>
         <p>Declination: <%= @star1.declination %></p>
         <p>Light years from Earth: <%= @star1.distance_light_year %></p>
       </div>
-      <%!-- <.h4>Star 2: <%= @star2 %></.h4> --%>
-      <div class="flex items-center justify-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
-        <div class="text-xl">Build your masterpiece</div>
+      <div :if={@star2.name != nil}>
+        <.h4>Star 2: <%= @star2.name %></.h4>
+        <p>Right ascension: <%= @star2.right_ascension %></p>
+        <p>Declination: <%= @star2.declination %></p>
+        <p>Light years from Earth: <%= @star2.distance_light_year %></p>
       </div>
     </div>
-  </.container>
-</.layout>
+    <div class="flex items-center justify-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
+      <div :if={@star2.name != nil}>
+        <.button phx-click="calculate" color="secondary" label="Calculate" variant="inverted" />
+      </div>
+    </div>
+  </div>
+</.container>
