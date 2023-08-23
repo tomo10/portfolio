@@ -80,17 +80,6 @@ defmodule Util do
     |> is_atom()
   end
 
-  @doc """
-
-  ## Examples
-
-    iex> format_money(123456)
-    "$1,234.56"
-  """
-  def format_money(cents, currency \\ "USD") do
-    CurrencyFormatter.format(cents, currency)
-  end
-
   @doc "Trim whitespace on either end of a string. Account for nil"
   def trim(str) when is_nil(str), do: str
   def trim(str) when is_binary(str), do: String.trim(str)

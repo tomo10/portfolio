@@ -1,5 +1,5 @@
 defmodule AdAstra.Trigonometry do
-  def string_to_int(right_asc_string) do
+  def string_to_number(right_asc_string) do
     String.split(right_asc_string)
     |> Enum.map(&trim/1)
     |> Enum.map(&to_number/1)
@@ -39,6 +39,10 @@ defmodule AdAstra.Trigonometry do
     dy = y2 - y1
     dz = z2 - z1
     [dx, dy, dz]
+  end
+
+  def calculate_two_stars(star1, star2) do
+    # star1 = string_to_number()
   end
 
   def distance_between_stars_light_years(dx, dy, dz) do
