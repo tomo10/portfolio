@@ -1,8 +1,31 @@
 defmodule AdAstra.Trigonometry do
-  def string_to_number(right_asc_or_declination) do
-    String.split(right_asc_or_declination)
-    |> Enum.map(&trim/1)
+  def right_asc_to_number(right_asc) do
+    String.split(right_asc, ~r/[^0-9.-]+/)
+    |> Enum.reject(&(String.trim(&1) == ""))
     |> Enum.map(&to_number/1)
+  end
+
+  def declination_to_number(decl) do
+    declination_remove_chars(decl)
+    |> Enum.reject(&(String.trim(&1) == ""))
+    |> check_array()
+    |> Enum.map(&to_number/1)
+  end
+
+  def check_array(arr) when length(arr) > 1, do: arr
+
+  def check_array(arr) when length(arr) == 1 do
+    string = hd(arr)
+    d = String.split_at(string, 2) |> elem(0)
+    m = String.split_at(string, 4) |> elem(0)
+    s = String.split_at(string, 6) |> elem(1)
+    [d, m, s]
+  end
+
+  # this doing same as first line of top function atm
+  @spec declination_remove_chars(binary) :: [binary]
+  def declination_remove_chars(decl) do
+    String.split(decl, ~r/[^0-9.-]+/)
   end
 
   defp to_number(str) do
@@ -13,7 +36,7 @@ defmodule AdAstra.Trigonometry do
     end
   end
 
-  defp trim(str), do: String.replace(str, ~r/[^0-9.-]/, "")
+  # def trim(str), do: String.replace(str, ~r/[^0-9.-]/, "")
 
   def right_asc_to_degrees(right_asc_arr) do
     [h, m, s] = right_asc_arr
@@ -30,9 +53,17 @@ defmodule AdAstra.Trigonometry do
   end
 
   def rectangle_coordinates(right_asc, decl, r) do
+    # IO.inspect(right_asc, label: "right_asc::::::")
+    # IO.inspect(decl, label: "decl::::::")
+    # IO.inspect(r, label: "r::::::")
+
     right_asc = to_radians(right_asc)
     decl = to_radians(decl)
 
+    # IO.inspect(right_asc, label: "right_asc RADS::::::")
+    # IO.inspect(decl, label: "decl RADS::::::")
+
+    # these numbers look fine. Not working in real app. Working in tests
     x = r * :math.cos(right_asc) * :math.cos(decl)
     y = r * :math.sin(right_asc) * :math.cos(decl)
     z = r * :math.sin(decl)
@@ -50,8 +81,8 @@ defmodule AdAstra.Trigonometry do
   end
 
   def calculate_two_stars(star1, star2, r1, r2) do
-    decl1 = declnation_total_parse(star1.declination)
-    decl2 = declnation_total_parse(star2.declination)
+    decl1 = declination_total_parse(star1.declination)
+    decl2 = declination_total_parse(star2.declination)
     right_asc1 = right_asc_total_parse(star1.right_ascension)
     right_asc2 = right_asc_total_parse(star2.right_ascension)
 
@@ -65,13 +96,13 @@ defmodule AdAstra.Trigonometry do
 
   defp right_asc_total_parse(right_asc) do
     right_asc
-    |> string_to_number()
+    |> right_asc_to_number()
     |> right_asc_to_degrees()
   end
 
-  defp declnation_total_parse(declination) do
+  defp declination_total_parse(declination) do
     [d, m, s] =
-      string_to_number(declination)
+      declination_to_number(declination)
 
     declination_to_degrees([d, m, s])
   end

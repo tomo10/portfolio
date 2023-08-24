@@ -3,7 +3,9 @@ defmodule TrigonometryTest do
 
   import AdAstra.Trigonometry,
     only: [
-      string_to_number: 1,
+      right_asc_to_number: 1,
+      declination_to_number: 1,
+      declination_remove_chars: 1,
       right_asc_to_degrees: 1,
       declination_to_degrees: 1,
       rectangle_coordinates: 3,
@@ -12,9 +14,20 @@ defmodule TrigonometryTest do
     ]
 
   test "Check the strings are formatted correctly to ints and floats" do
-    assert string_to_number("18h 36m 56.19s") == [18, 36, 56.19]
-    assert string_to_number("-16°  42′  58″") == [-16, 42, 58]
+    assert right_asc_to_number("18h 36m 56.19s") == [18, 36, 56.19]
+    assert declination_to_number("-16°  42′  58″") == [-16, 42, 58]
+    assert declination_to_number("+38° 46′ 58.8″") == [38, 46, 58.8]
+    assert declination_to_number("+38°46′58.8″") == [38, 46, 58.8]
+    assert declination_to_number("+38°  46′  58.8″") == [38, 46, 58.8]
   end
+
+  # test "Remove the whitespace and non integer and . chars" do
+  #   assert declination_remove_chars("18h 36m 56.19s") == ["18", "36", "56.19", ""]
+  #   assert declination_remove_chars("-16°  42′  58″") == ["-16", "42", "58"]
+  #   assert declination_remove_chars("+38° 46′ 58.8″") == ["38", "46", "58.8"]
+  #   assert declination_remove_chars("+38°46′58.8″") == ["38", "46", "58.8"]
+  #   assert declination_remove_chars("+38°  46′  58.8″") == ["38", "46", "58.8"]
+  # end
 
   test "The right asc hours, mins, seconds are formatted to degrees" do
     assert right_asc_to_degrees([18, 36, 56.19]) == 279.234125
@@ -24,6 +37,20 @@ defmodule TrigonometryTest do
   test "The declination hours, mins, seconds are formatted to degrees" do
     assert declination_to_degrees([-16, 42, 58]) == -16.71611111111111
     assert declination_to_degrees([38, 47, 01]) == 38.78361111111111
+  end
+
+  test "Calculate the rectangle coordinates of 1 star" do
+    assert rectangle_coordinates(200, 40, 25) == [
+             -17.996157759823856,
+             -6.5500657557346225,
+             16.06969024216348
+           ]
+
+    assert rectangle_coordinates(100, 20, 25) == [
+             -4.0793977791633695,
+             23.135414459958085,
+             8.550503583141717
+           ]
   end
 
   test "Calc the distance between two stars" do

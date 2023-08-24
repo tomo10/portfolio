@@ -37,9 +37,11 @@
       </div>
     </div>
     <div class="flex items-center justify-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
-      <div :if={@star2.name != nil}>
+      <%= if @result do %>
+        <p>Distance between 2 stars: <%= @result %></p>
+      <% else %>
         <.button phx-click="calculate" color="secondary" label="Calculate" variant="inverted" />
-      </div>
+      <% end %>
     </div>
   </div>
 </.container>
