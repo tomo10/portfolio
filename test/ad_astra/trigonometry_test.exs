@@ -5,7 +5,6 @@ defmodule TrigonometryTest do
     only: [
       right_asc_to_number: 1,
       declination_to_number: 1,
-      declination_remove_chars: 1,
       right_asc_to_degrees: 1,
       declination_to_degrees: 1,
       rectangle_coordinates: 3,
@@ -21,14 +20,6 @@ defmodule TrigonometryTest do
     assert declination_to_number("+38°  46′  58.8″") == [38, 46, 58.8]
   end
 
-  # test "Remove the whitespace and non integer and . chars" do
-  #   assert declination_remove_chars("18h 36m 56.19s") == ["18", "36", "56.19", ""]
-  #   assert declination_remove_chars("-16°  42′  58″") == ["-16", "42", "58"]
-  #   assert declination_remove_chars("+38° 46′ 58.8″") == ["38", "46", "58.8"]
-  #   assert declination_remove_chars("+38°46′58.8″") == ["38", "46", "58.8"]
-  #   assert declination_remove_chars("+38°  46′  58.8″") == ["38", "46", "58.8"]
-  # end
-
   test "The right asc hours, mins, seconds are formatted to degrees" do
     assert right_asc_to_degrees([18, 36, 56.19]) == 279.234125
     assert right_asc_to_degrees([1, 5, 40]) == 16.416666666666664
@@ -40,13 +31,13 @@ defmodule TrigonometryTest do
   end
 
   test "Calculate the rectangle coordinates of 1 star" do
-    assert rectangle_coordinates(200, 40, 25) == [
+    assert rectangle_coordinates(200, 40, "25") == [
              -17.996157759823856,
              -6.5500657557346225,
              16.06969024216348
            ]
 
-    assert rectangle_coordinates(100, 20, 25) == [
+    assert rectangle_coordinates(100, 20, "25") == [
              -4.0793977791633695,
              23.135414459958085,
              8.550503583141717
@@ -73,6 +64,6 @@ defmodule TrigonometryTest do
       right_ascension: "18h 36m 56.19s"
     }
 
-    assert calculate_two_stars(sirius, vega, 8.6, 25.3) == 33.42
+    assert calculate_two_stars(sirius, vega, "8.6", "25.3") == 33.42
   end
 end

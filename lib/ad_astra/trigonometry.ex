@@ -6,7 +6,7 @@ defmodule AdAstra.Trigonometry do
   end
 
   def declination_to_number(decl) do
-    declination_remove_chars(decl)
+    String.split(decl, ~r/[^0-9.-]+/)
     |> Enum.reject(&(String.trim(&1) == ""))
     |> check_array()
     |> Enum.map(&to_number/1)
@@ -22,12 +22,6 @@ defmodule AdAstra.Trigonometry do
     [d, m, s]
   end
 
-  # this doing same as first line of top function atm
-  @spec declination_remove_chars(binary) :: [binary]
-  def declination_remove_chars(decl) do
-    String.split(decl, ~r/[^0-9.-]+/)
-  end
-
   defp to_number(str) do
     if String.contains?(str, ".") do
       String.to_float(str)
@@ -35,8 +29,6 @@ defmodule AdAstra.Trigonometry do
       String.to_integer(str)
     end
   end
-
-  # def trim(str), do: String.replace(str, ~r/[^0-9.-]/, "")
 
   def right_asc_to_degrees(right_asc_arr) do
     [h, m, s] = right_asc_arr
@@ -53,17 +45,10 @@ defmodule AdAstra.Trigonometry do
   end
 
   def rectangle_coordinates(right_asc, decl, r) do
-    # IO.inspect(right_asc, label: "right_asc::::::")
-    # IO.inspect(decl, label: "decl::::::")
-    # IO.inspect(r, label: "r::::::")
-
     right_asc = to_radians(right_asc)
     decl = to_radians(decl)
+    r = to_number(r)
 
-    # IO.inspect(right_asc, label: "right_asc RADS::::::")
-    # IO.inspect(decl, label: "decl RADS::::::")
-
-    # these numbers look fine. Not working in real app. Working in tests
     x = r * :math.cos(right_asc) * :math.cos(decl)
     y = r * :math.sin(right_asc) * :math.cos(decl)
     z = r * :math.sin(decl)
