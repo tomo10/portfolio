@@ -1,6 +1,8 @@
 <.container class="py-16">
   <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
-  <.h4>Please type in the name of your first star</.h4>
+  <.h4>
+    Enter the names of any 2 stars you can see in the night sky. Then calculate how long it would take to travel between them at varying speeds
+  </.h4>
 
   <div class="px-4 py-8 sm:px-0">
     <.form for={@form} phx-submit="save">
@@ -38,9 +40,11 @@
     </div>
     <div class="flex items-center justify-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
       <%= if @result do %>
-        <p>Distance between 2 stars: <%= @result %></p>
+        <.h4>Distance between 2 stars: <%= @result %></.h4>
       <% else %>
-        <.button phx-click="calculate" color="secondary" label="Calculate" variant="inverted" />
+        <div :if={@star2.name != nil && !@result}>
+          <.button phx-click="calculate" color="secondary" label="Calculate" variant="inverted" />
+        </div>
       <% end %>
     </div>
   </div>
