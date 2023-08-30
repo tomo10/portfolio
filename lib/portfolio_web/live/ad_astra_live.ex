@@ -23,16 +23,14 @@ defmodule PortfolioWeb.AdAstraLive do
 
   @impl true
   def handle_event("save", %{"star" => star_params}, socket) do
-    star1 = Api.fetch(star_params["star1"])
-    star2 = Api.fetch(star_params["star2"])
+    case Api.fetch_stars(star_params["star1"], star_params["star2"]) do
+      {:ok, stars} ->
+        [star1, star2] = stars
+        {:noreply, assign(socket, star1: star1, star2: star2)}
 
-    socket =
-      socket
-      |> assign(:form, to_form(Stars.change_star(%Star{})))
-      |> assign(:star1, star1)
-      |> assign(:star2, star2)
-
-    {:noreply, socket}
+      {:error, _} ->
+        {:noreply, put_flash(socket, :error, "Houston we have a problem")}
+    end
   end
 
   def handle_event("calculate", _, socket) do
@@ -45,5 +43,9 @@ defmodule PortfolioWeb.AdAstraLive do
       )
 
     {:noreply, assign(socket, :result, distance)}
+  end
+
+  def handle_event("type", params, socket) do
+    {:noreply, socket}
   end
 end

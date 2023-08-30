@@ -12,6 +12,6 @@ defmodule AdAstra.Stars.Star do
   def changeset(star, attrs) do
     star
     |> cast(attrs, [:name, :right_ascension, :declination, :distance_light_year])
-    |> validate_required([:name])
+    |> validate_required([:name, :right_ascension, :declination, :distance_light_year])
   end
 end

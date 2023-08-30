@@ -6,7 +6,7 @@ defmodule AdAstra.Stars do
   Starts a new agent / bucket
   """
   def start_link(_opts) do
-    Agent.start_link(fn -> %{} end)
+    Agent.start_link(fn -> %{star_1: %Star{}, star_2: %Star{}} end, name: __MODULE__)
   end
 
   @doc """
@@ -17,10 +17,17 @@ defmodule AdAstra.Stars do
   end
 
   @doc """
+  Gets the stars from the bucket
+  """
+  def stars do
+    Agent.get(__MODULE__, fn map -> Map.values(map) end)
+  end
+
+  @doc """
   Puts the 'value' for the given 'key' in the 'bucket'
   """
-  def put(bucket, key, value) do
-    Agent.update(bucket, &Map.put(&1, key, value))
+  def put(key, value) do
+    Agent.update(__MODULE__, &Map.put(&1, key, value))
   end
 
   @doc """
