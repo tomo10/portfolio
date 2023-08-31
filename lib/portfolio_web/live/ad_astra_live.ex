@@ -1,51 +1,56 @@
 defmodule PortfolioWeb.AdAstraLive do
   use PortfolioWeb, :live_view
   alias AdAstra.Api
-  alias AdAstra.Stars
+  # alias AdAstra.Stars
   alias AdAstra.Stars.Star
   alias AdAstra.Trigonometry
 
   @impl true
   def mount(_params, _session, socket) do
-    cs = Stars.change_star(%Star{})
+    form_params = %{star_name_1: "", star_name_2: "", speed: ""}
 
     socket =
       assign(
         socket,
         result: nil,
-        star1: %Star{},
-        star2: %Star{},
-        form: to_form(cs)
+        star_1: %Star{},
+        star_2: %Star{},
+        form: to_form(form_params)
       )
 
     {:ok, socket}
   end
 
+  def star(assigns) do
+    ~H"""
+    <div :if={@star.name != nil} class="p-8">
+      <.h4>Star 1: <%= @star.name %></.h4>
+      <p>Right ascension: <%= @star.right_ascension %></p>
+      <p>Declination: <%= @star.declination %></p>
+      <p>Light years from Earth: <%= @star.distance_light_year %></p>
+    </div>
+    """
+  end
+
   @impl true
-  def handle_event("save", %{"star" => star_params}, socket) do
-    case Api.fetch_stars(star_params["star1"], star_params["star2"]) do
+  def handle_event("save", params, socket) do
+    case Api.fetch_stars(params["star_name_1"], params["star_name_2"]) do
       {:ok, stars} ->
         [star1, star2] = stars
-        {:noreply, assign(socket, star1: star1, star2: star2)}
+        result = calculate(star1, star2)
+        {:noreply, assign(socket, star_1: star1, star_2: star2, result: result)}
 
-      {:error, _} ->
-        {:noreply, put_flash(socket, :error, "Houston we have a problem")}
+      {:error, msg} ->
+        {:noreply, put_flash(socket, :error, msg)}
     end
   end
 
-  def handle_event("calculate", _, socket) do
-    distance =
-      Trigonometry.calculate_two_stars(
-        socket.assigns.star1,
-        socket.assigns.star2,
-        socket.assigns.star1.distance_light_year,
-        socket.assigns.star2.distance_light_year
-      )
-
-    {:noreply, assign(socket, :result, distance)}
-  end
-
-  def handle_event("type", params, socket) do
-    {:noreply, socket}
+  def calculate(star_1, star_2) do
+    Trigonometry.calculate_two_stars(
+      star_1,
+      star_2,
+      star_1.distance_light_year,
+      star_2.distance_light_year
+    )
   end
 end

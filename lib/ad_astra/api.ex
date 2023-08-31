@@ -13,17 +13,18 @@ defmodule AdAstra.Api do
     if length(Stars.stars()) == 2 do
       {:ok, Stars.stars()}
     else
-      {:error, "We don't have two stars"}
+      {:error, "Houston we have a problem"}
     end
   end
 
   def fetch_star(star, atom) do
     case fetch(star) do
       {:ok, body} ->
-        Stars.put(atom, extract_values_from_star(body))
+        values = extract_values_from_star(body)
+        Stars.put(atom, values)
 
-      {:error, _} ->
-        IO.puts("We have a problem with star 1")
+      {:error, msg} ->
+        IO.puts("Network error with the api #{msg}")
     end
   end
 
@@ -34,12 +35,18 @@ defmodule AdAstra.Api do
   end
 
   def extract_values_from_star(api_result) do
-    %{
-      name: extract_value_from_star("name", api_result),
-      declination: extract_value_from_star("declination", api_result),
-      right_ascension: extract_value_from_star("right_ascension", api_result),
-      distance_light_year: extract_value_from_star("distance_light_year", api_result)
-    }
+    case api_result do
+      [head | _tail] ->
+        %{
+          name: Map.get(head, "name"),
+          declination: Map.get(head, "declination"),
+          right_ascension: Map.get(head, "right_ascension"),
+          distance_light_year: Map.get(head, "distance_light_year")
+        }
+
+      [] ->
+        nil
+    end
   end
 
   def ninja_url(star) do
@@ -55,8 +62,4 @@ defmodule AdAstra.Api do
 
   defp check_for_error(200), do: :ok
   defp check_for_error(_), do: :error
-
-  def extract_value_from_star(key, star) do
-    Enum.map(star, fn %{^key => value} -> value end) |> hd()
-  end
 end

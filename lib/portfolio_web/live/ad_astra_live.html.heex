@@ -1,56 +1,39 @@
 <.container class="py-16">
   <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
   <.h4>
-    Enter the names of any 2 stars you can see in the night sky. Then calculate how long it would take to travel between them at varying speeds
+    Enter the names of any 2 stars you can see in the night sky. Then select the speed at which you'd like to travel between them...
   </.h4>
-
-  <div class="flex flex-row">
-    <.button phx-click="type" color="primary" label="Car" variant="outline" />
-    <.button phx-click="type" color="secondary" label="Jumbo Jet" variant="outline" />
-    <.button phx-click="type" color="info" label="Space Shuttle" variant="outline" />
-  </div>
   <div class="px-4 py-8 sm:px-0">
-    <.form for={@form} phx-submit="save">
+    <.form for={@form} phx-submit="save" class="pb-8">
       <.field
         required
-        field={@form[:star1]}
+        field={@form[:star_name_1]}
         placeholder="Name"
         phx-debounce="blur"
         label="Star 1"
       />
       <.field
         required
-        field={@form[:star2]}
+        field={@form[:star_name_2]}
         placeholder="Name"
         phx-debounce="blur"
         label="Star 2"
       />
-      <div class="flex justify-end">
-        <.button>Submit</.button>
-      </div>
+      <.field
+        field={@form[:speed]}
+        type="radio-group"
+        options={[{"Speed of Light", "1"}, {"Space Shuttle", "2"}, {"Jumbo Jet", "3"}]}
+      />
+      <.button>Calculate</.button>
     </.form>
-    <div :if={@star2.name != nil} class="flex flex-row justify-around">
-      <div :if={@star1.name != nil}>
-        <.h4>Star 1: <%= @star1.name %></.h4>
-        <p>Right ascension: <%= @star1.right_ascension %></p>
-        <p>Declination: <%= @star1.declination %></p>
-        <p>Light years from Earth: <%= @star1.distance_light_year %></p>
+    <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
+      <div :if={@star_2.name != nil} class="flex flex-row">
+        <.star star={@star_1} />
+        <.star star={@star_2} />
       </div>
-      <div :if={@star2.name != nil}>
-        <.h4>Star 2: <%= @star2.name %></.h4>
-        <p>Right ascension: <%= @star2.right_ascension %></p>
-        <p>Declination: <%= @star2.declination %></p>
-        <p>Light years from Earth: <%= @star2.distance_light_year %></p>
-      </div>
-    </div>
-    <div class="flex items-center justify-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
-      <%= if @result do %>
+      <div :if={@result}>
         <.h4>Distance between 2 stars: <%= @result %></.h4>
-      <% else %>
-        <div :if={@star2.name != nil && !@result}>
-          <.button phx-click="calculate" color="secondary" label="Calculate" variant="inverted" />
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </.container>

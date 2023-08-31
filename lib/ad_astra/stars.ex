@@ -27,8 +27,12 @@ defmodule AdAstra.Stars do
   Puts the 'value' for the given 'key' in the 'bucket'
   """
   def put(key, value) do
-    Agent.update(__MODULE__, &Map.put(&1, key, value))
+    if value != nil do
+      Agent.update(__MODULE__, &Map.put(&1, key, value))
+    end
   end
+
+  # def put(key, nil), do: nil
 
   @doc """
   Deletes `key` from `bucket`.
