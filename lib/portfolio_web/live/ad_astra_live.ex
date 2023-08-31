@@ -24,7 +24,7 @@ defmodule PortfolioWeb.AdAstraLive do
   def star(assigns) do
     ~H"""
     <div :if={@star.name != nil} class="p-8">
-      <.h4>Star 1: <%= @star.name %></.h4>
+      <.h4><%= @star.name %></.h4>
       <p>Right ascension: <%= @star.right_ascension %></p>
       <p>Declination: <%= @star.declination %></p>
       <p>Light years from Earth: <%= @star.distance_light_year %></p>
@@ -37,7 +37,7 @@ defmodule PortfolioWeb.AdAstraLive do
     case Api.fetch_stars(params["star_name_1"], params["star_name_2"]) do
       {:ok, stars} ->
         [star1, star2] = stars
-        result = calculate(star1, star2)
+        result = calculate(star1, star2, params["speed"])
         {:noreply, assign(socket, star_1: star1, star_2: star2, result: result)}
 
       {:error, msg} ->
@@ -45,12 +45,13 @@ defmodule PortfolioWeb.AdAstraLive do
     end
   end
 
-  def calculate(star_1, star_2) do
+  def calculate(star_1, star_2, speed) do
     Trigonometry.calculate_two_stars(
       star_1,
       star_2,
       star_1.distance_light_year,
       star_2.distance_light_year
     )
+    |> Trigonometry.convert_speed(speed)
   end
 end

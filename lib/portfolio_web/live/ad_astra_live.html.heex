@@ -22,7 +22,12 @@
       <.field
         field={@form[:speed]}
         type="radio-group"
-        options={[{"Speed of Light", "1"}, {"Space Shuttle", "2"}, {"Jumbo Jet", "3"}]}
+        options={[
+          {"Speed of Light", "1"},
+          {"Voyager 1", "2"},
+          {"Space Shuttle", "3"},
+          {"Jumbo Jet", "4"}
+        ]}
       />
       <.button>Calculate</.button>
     </.form>
@@ -32,7 +37,7 @@
         <.star star={@star_2} />
       </div>
       <div :if={@result}>
-        <.h4>Distance between 2 stars: <%= @result %></.h4>
+        <.h4>How many years to travel between them: <%= @result %></.h4>
       </div>
     </div>
   </div>

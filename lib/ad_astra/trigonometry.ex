@@ -65,6 +65,9 @@ defmodule AdAstra.Trigonometry do
     [dx, dy, dz]
   end
 
+  @doc """
+  This takes in 2 star names, their distance from earth in light years, and returns distance in light years
+  """
   def calculate_two_stars(star1, star2, r1, r2) do
     decl1 = declination_total_parse(star1.declination)
     decl2 = declination_total_parse(star2.declination)
@@ -77,6 +80,29 @@ defmodule AdAstra.Trigonometry do
     [dx, dy, dz] = rectangluar_coordinates_delta(x1, y1, z1, x2, y2, z2)
 
     distance_between_stars(dx, dy, dz)
+  end
+
+  @doc """
+  This takes in distance between 2 stars in light years, the new speed, and returns travel time in years
+  "1" -> Speed of light
+  "2" -> Voyager 1
+  "3" -> Space Shuttle
+  "4" -> Jumbo Jet
+  """
+  def convert_speed(light_years, speed) do
+    case speed do
+      "1" ->
+        light_years
+
+      "2" ->
+        light_years * 17560
+
+      "3" ->
+        light_years * 38343
+
+      "4" ->
+        light_years * 1_092_833
+    end
   end
 
   defp right_asc_total_parse(right_asc) do
