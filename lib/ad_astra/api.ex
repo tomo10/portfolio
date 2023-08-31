@@ -44,6 +44,7 @@ defmodule AdAstra.Api do
           distance_light_year: Map.get(head, "distance_light_year")
         }
 
+      # using nil as error handling for now when no star is returned
       [] ->
         nil
     end
