@@ -41,7 +41,7 @@ defmodule PortfolioWeb.Components.LandingPage do
             <div class="flex items-center justify-center lg:h-128">
               <img
                 id="hero-image"
-                class="fade-in-from-right-animation lg:max-w-lg max-h-[500px]"
+                class="fade-in-from-right-animation rounded-lg lg:max-w-lg max-h-[300px]"
                 src={@image_src}
                 alt=""
               />
@@ -86,6 +86,7 @@ defmodule PortfolioWeb.Components.LandingPage do
 
   attr :title, :string, required: true
   attr :description, :string
+  # attr :link_to, :string, required: true
 
   attr :features, :list,
     default: [],
@@ -98,7 +99,7 @@ defmodule PortfolioWeb.Components.LandingPage do
 
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
 
-  def features(assigns) do
+  def projects(assigns) do
     ~H"""
     <section
       id="projects"
@@ -123,7 +124,7 @@ defmodule PortfolioWeb.Components.LandingPage do
                 </span>
               </div>
               <div class="mb-2 text-lg font-medium md:text-2xl">
-                <.link patch="/ad-astra">
+                <.link patch={feature.link_to}>
                   <%= feature.title %>
                 </.link>
               </div>
@@ -191,14 +192,14 @@ defmodule PortfolioWeb.Components.LandingPage do
     """
   end
 
-  attr :title, :string, default: "Testimonials"
-  attr :testimonials, :list, doc: "A list of maps with the keys: content, image_src, name, title"
+  attr :title, :string, default: "Contact"
+  attr :socials, :list, doc: "A list of maps with the keys: title, image_src, "
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
 
-  def testimonials(assigns) do
+  def contact(assigns) do
     ~H"""
     <section
-      id="testimonials"
+      id="contact"
       class="relative z-10 transition duration-500 ease-in-out bg-white py-36 dark:bg-gray-900"
     >
       <div class="overflow-hidden content-wrapper">
@@ -210,8 +211,8 @@ defmodule PortfolioWeb.Components.LandingPage do
           </div>
 
           <div class="solo-animation fade-in-animation flickity">
-            <%= for testimonial <- @testimonials do %>
-              <.testimonial_panel {testimonial} />
+            <%= for social <- @socials do %>
+              <.contact_panel {social} />
             <% end %>
           </div>
         </.container>
@@ -273,41 +274,23 @@ defmodule PortfolioWeb.Components.LandingPage do
     """
   end
 
-  attr :content, :string, required: true
   attr :image_src, :string, required: true
-  attr :name, :string, required: true
   attr :title, :string, required: true
+  attr :other, :string
+  attr :link, :string, required: true
 
-  def testimonial_panel(assigns) do
+  def contact_panel(assigns) do
     ~H"""
-    <div class="w-full p-6 mr-10 overflow-hidden text-gray-700 transition duration-500 ease-in-out rounded-lg shadow-lg md:p-8 md:w-8/12 lg:w-5/12 bg-primary-50 dark:bg-gray-700 dark:text-white carousel-cell last:mr-0">
-      <blockquote class="mt-6 md:flex-grow md:flex md:flex-col">
-        <div class="relative text-lg font-medium md:flex-grow">
-          <svg
-            class="absolute top-[-20px] left-0 w-8 h-8 transform -translate-x-3 -translate-y-2 text-primary-500"
-            fill="currentColor"
-            viewBox="0 0 32 32"
-            aria-hidden="true"
-          >
-            <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z">
-            </path>
-          </svg>
-          <p class="relative">
-            <%= @content %>
-          </p>
+    <div class="p-4 mr-10 overflow-hidden text-gray-700 transition duration-500 ease-in-out rounded-lg shadow-lg md:p-8 md:w-8/12 lg:w-5/12 bg-primary-50 dark:bg-gray-700 dark:text-white carousel-cell last:mr-0">
+      <div class="flex items-center">
+        <div class="inline-flex flex-shrink-0 border-2 border-white rounded-full">
+          <img class="w-16 h-16 rounded-full" src={@image_src} alt="" />
         </div>
-        <footer class="mt-8">
-          <div class="flex items-start">
-            <div class="inline-flex flex-shrink-0 border-2 border-white rounded-full">
-              <img class="w-12 h-12 rounded-full" src={@image_src} alt="" />
-            </div>
-            <div class="ml-4">
-              <div class="text-base font-medium"><%= @name %></div>
-              <div class="text-base font-semibold"><%= @title %></div>
-            </div>
-          </div>
-        </footer>
-      </blockquote>
+        <div class="ml-4">
+          <.link href={@link} class="text-base font-bold"><%= @title %></.link>
+          <div :if={@other} class="text-base font-semibold"><%= @other %></div>
+        </div>
+      </div>
     </div>
     """
   end

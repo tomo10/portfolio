@@ -25,9 +25,9 @@ config :portfolio,
   support_email: "thce28@gmail.com",
   mailer_default_from_name: "Contact",
   mailer_default_from_email: "thce28@gmail.com",
-  logo_url_for_emails:
-    "https://res.cloudinary.com/wickedsites/image/upload/v1643336799/petal/petal_logo_light_w5jvlg.png",
-  seo_description: "SaaS boilerplate template powered by Elixir's Phoenix and TailwindCSS",
+  logo_url_for_emails: "",
+  seo_description:
+    "Portfolio website and contact information for Thomas Edwards full stack developer",
   github_url: "https://github.com/tomo10"
 
 # Petal Pro features:

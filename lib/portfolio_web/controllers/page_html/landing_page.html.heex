@@ -2,7 +2,7 @@
 <% max_width = "xl" %>
 
 <LandingPage.hero
-  image_src={~p"/images/landing_page/ted.jpeg"}
+  image_src={~p"/images/landing_page/moi.jpeg"}
   logo_cloud_title={gettext("Trusted by brands all over the world*")}
   max_width={max_width}
 >
@@ -18,13 +18,13 @@
       label={gettext("Get in touch")}
       link_type="a"
       color="primary"
-      to={~p"/auth/register"}
+      to="mailto:thce28@gmail.com"
       size="lg"
     />
   </:action_buttons>
   <:description>
     <%= gettext(
-      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, React Native, and the PETAL stack"
+      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, LiveView, React Native, and the PETAL stack"
     ) %>
   </:description>
   <:cloud_logo>
@@ -129,81 +129,54 @@
   </:cloud_logo>
 </LandingPage.hero>
 
-<LandingPage.features
+<LandingPage.projects
   title={gettext("Projects")}
   description={gettext("Here are a few projects I have built using Elixir and LiveView")}
   features={[
     %{
       title: "Ad Astra",
-      description: Faker.Lorem.sentence(10..20),
-      icon: :rocket_launch
+      description:
+        "Type in any 2 stars and find the distance between them and how long it would take to travel from one to the other. To the stars!",
+      icon: :rocket_launch,
+      link_to: "/ad-astra"
+    },
+    %{
+      title: "Pangaea",
+      description:
+        "A conservation crowdfunding platform and planet centric social network. Conservation has no borders",
+      icon: :globe_alt,
+      link_to: "https://github.com/tomo10/pangaea_pro"
     },
     %{
       title: "AIDA",
       description: Faker.Lorem.sentence(10..20),
-      icon: :puzzle_piece
-    },
-    %{
-      title: "Pangaea",
-      description: Faker.Lorem.sentence(10..20),
-      icon: :globe_alt
+      icon: :puzzle_piece,
+      link_to: "/"
     }
   ]}
   max_width={max_width}
 />
 
-<LandingPage.solo_feature
-  title={gettext("Page builder")}
-  description={
-    gettext(
-      "Build out your web application by navigating to unused routes and creating pages out of thin air!"
-    )
-  }
-  image_src={~p"/images/landing_page/feature1.svg"}
-  background_color="primary"
+<LandingPage.contact
   max_width={max_width}
->
-  <.button
-    variant="solid"
-    link_type="a"
-    to="/test-page"
-    label={gettext("Try it out now")}
-    color="primary"
-    size="lg"
-    class="mt-8"
-  />
-</LandingPage.solo_feature>
-
-<LandingPage.solo_feature
-  inverted
-  title={gettext("Layouts")}
-  description={
-    gettext(
-      "Layouts can be tricky to build. Petal Pro makes it easy with it's stacked and sidebar layouts."
-    )
-  }
-  image_src={~p"/images/landing_page/feature2.svg"}
-  background_color="secondary"
-  max_width={max_width}
-/>
-
-<LandingPage.testimonials
-  max_width={max_width}
-  testimonials={
-    [
-      "https://res.cloudinary.com/wickedsites/image/upload/v1636595191/dummy_data/avatar_32_cayiid.png",
-      "https://res.cloudinary.com/wickedsites/image/upload/v1636595191/dummy_data/avatar_26_mjcxen.png",
-      "https://res.cloudinary.com/wickedsites/image/upload/v1636595189/dummy_data/avatar_10_d3tw5q.png",
-      "https://res.cloudinary.com/wickedsites/image/upload/v1636595190/dummy_data/avatar_17_eolat2.png",
-      "https://res.cloudinary.com/wickedsites/image/upload/v1636595189/dummy_data/avatar_13_xrlvql.png"
-    ]
-    |> Enum.map(fn src ->
-      %{
-        name: Faker.Person.name(),
-        title: "CEO, #{Faker.Company.name()}",
-        image_src: src,
-        content: Faker.Lorem.sentence(10..20)
-      }
-    end)
-  }
+  socials={[
+    %{
+      image_src: ~p"/images/landing_page/moi.jpeg",
+      title: "Thomas Edwards",
+      other: "thce28@gmail.com",
+      link: "mailto:thce28@gmail.com"
+    },
+    %{
+      image_src: ~p"/images/landing_page/linkedin.jpeg",
+      title: "LinkedIn",
+      other: "",
+      link: "https://www.linkedin.com/in/thomas-edwards-dev/"
+    },
+    %{
+      image_src: ~p"/images/landing_page/github.png",
+      title: "GitHub",
+      other: "",
+      link: "https://github.com/tomo10"
+    }
+  ]}
 />

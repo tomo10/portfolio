@@ -10,7 +10,7 @@ defmodule PortfolioWeb.Menus do
   def public_menu_items(_user \\ nil),
     do: [
       %{label: gettext("Projects"), path: "/#projects"},
-      %{label: gettext("Testimonials"), path: "/#testimonials"}
+      %{label: gettext("Contact"), path: "/#contact"}
     ]
 
   # Signed out main menu
