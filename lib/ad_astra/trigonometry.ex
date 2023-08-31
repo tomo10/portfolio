@@ -1,10 +1,13 @@
 defmodule AdAstra.Trigonometry do
+  import Number
+
   def right_asc_to_number(right_asc) do
     String.split(right_asc, ~r/[^0-9.-]+/)
     |> Enum.reject(&(String.trim(&1) == ""))
     |> Enum.map(&to_number/1)
   end
 
+  @spec declination_to_number(binary) :: list
   def declination_to_number(decl) do
     String.split(decl, ~r/[^0-9.-]+/)
     |> Enum.reject(&(String.trim(&1) == ""))
@@ -103,6 +106,9 @@ defmodule AdAstra.Trigonometry do
       "4" ->
         light_years * 1_092_833
     end
+    |> Number.Delimit.number_to_delimited(precision: 0)
+
+    # |> :erlang.float_to_binary(decimals: 0)
   end
 
   defp right_asc_total_parse(right_asc) do
