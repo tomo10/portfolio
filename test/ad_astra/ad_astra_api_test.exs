@@ -1,7 +1,7 @@
 defmodule AdAstraApiTest do
   use ExUnit.Case
 
-  import AdAstra.Api, only: [extract_value_from_star: 2]
+  import AdAstra.Api, only: [extract_values_from_star: 1]
 
   test "get the declination value from the star json list" do
     star_list = [
@@ -17,7 +17,14 @@ defmodule AdAstraApiTest do
       }
     ]
 
-    assert extract_value_from_star("right_ascension", {:ok, star_list}) == "18h 36m 56.19s"
-    assert extract_value_from_star("declination", {:ok, star_list}) == "+38° 46′ 58.8″"
+    value = %{
+      name: "Vega",
+      declination: "+38° 46′ 58.8″",
+      right_ascension: "18h 36m 56.19s",
+      distance_light_year: "25"
+    }
+
+    assert extract_values_from_star(star_list) == value
+    assert extract_values_from_star([]) == nil
   end
 end

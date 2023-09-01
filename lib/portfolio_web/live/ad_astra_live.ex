@@ -1,7 +1,6 @@
 defmodule PortfolioWeb.AdAstraLive do
   use PortfolioWeb, :live_view
   alias AdAstra.Api
-  # alias AdAstra.Stars
   alias AdAstra.Stars.Star
   alias AdAstra.Trigonometry
 
