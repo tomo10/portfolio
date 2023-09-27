@@ -24,7 +24,7 @@
   </:action_buttons>
   <:description>
     <%= gettext(
-      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, LiveView, React Native, and the PETAL stack"
+      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, LiveView, React Native, and the PETAL stack. Looking for a full time position in the Elixir domain"
     ) %>
   </:description>
   <:cloud_logo>
@@ -131,7 +131,9 @@
 
 <LandingPage.projects
   title={gettext("Projects")}
-  description={gettext("Here are a few projects I have built using Elixir and LiveView")}
+  description={
+    gettext("Here are a few projects I have built using Elixir and LiveView (inc. this website)")
+  }
   features={[
     %{
       title: "Ad Astra",
@@ -149,7 +151,8 @@
     },
     %{
       title: "AIDA",
-      description: Faker.Lorem.sentence(10..20),
+      description:
+        "An artificially intelligent digital assistant. Utilising Bumblebee and Elixir to build an assistant to help with daily tasks",
       icon: :puzzle_piece,
       link_to: "/"
     }

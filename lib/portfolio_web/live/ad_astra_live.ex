@@ -6,7 +6,7 @@ defmodule PortfolioWeb.AdAstraLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    form_params = %{star_name_1: "", star_name_2: "", speed: ""}
+    form_params = %{"star_name_1" => "", "star_name_2" => "", "speed" => ""}
 
     socket =
       assign(
@@ -18,6 +18,11 @@ defmodule PortfolioWeb.AdAstraLive do
       )
 
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_params(params, _uri, socket) do
+    {:noreply, socket}
   end
 
   def star(assigns) do
@@ -42,6 +47,12 @@ defmodule PortfolioWeb.AdAstraLive do
       {:error, msg} ->
         {:noreply, put_flash(socket, :error, msg)}
     end
+  end
+
+  @impl true
+  def handle_event("close_modal", _, socket) do
+    # Go back to the :index live action
+    {:noreply, push_patch(socket, to: "/ad-astra")}
   end
 
   def calculate(star_1, star_2, speed) do

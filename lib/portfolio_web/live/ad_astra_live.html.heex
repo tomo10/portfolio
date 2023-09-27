@@ -1,8 +1,30 @@
 <.container class="py-16">
   <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
   <.h4>
+    Built this little project because I'm constantly boring my friends about how vast space is
+  </.h4>
+  <.h4>
     Enter the names of any 2 stars you can see in the night sky. Then select the speed at which you'd like to travel between them...
   </.h4>
+  <.a
+    type="live_patch"
+    class="inline-block bg-secondary-500 hover:bg-secondary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-secondary-700"
+    to="ad-astra/modal"
+    label="Opens the modal"
+  />
+
+  <%= if @live_action == :modal do %>
+    <.modal max_width="lg" title="How it works">
+      <.p>
+        We make two calls to the https://api-ninjas.com/api/stars endpoint and store the result of the call in an Elixir agent
+      </.p>
+
+      <div class="flex justify-end">
+        <.button label="close" phx-click={PetalComponents.Modal.hide_modal()} />
+      </div>
+    </.modal>
+  <% end %>
+
   <div class="px-4 py-8 sm:px-0">
     <.form for={@form} phx-submit="save" class="pb-8">
       <.field
