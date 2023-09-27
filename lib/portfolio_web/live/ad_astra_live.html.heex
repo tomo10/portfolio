@@ -10,13 +10,30 @@
     type="live_patch"
     class="inline-block bg-secondary-500 hover:bg-secondary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-secondary-700"
     to="ad-astra/modal"
-    label="Opens the modal"
+    label="How it works"
   />
 
   <%= if @live_action == :modal do %>
-    <.modal max_width="lg" title="How it works">
-      <.p>
-        We make two calls to the https://api-ninjas.com/api/stars endpoint and store the result of the call in an Elixir agent
+    <.modal max_width="md" title="How it works">
+      <.p class="py-2">
+        We make two calls to the
+        <a href="https://api-ninjas.com/api/stars" target="_blank" class="font-semibold">
+          https://api-ninjas.com/api/stars
+        </a>
+        endpoint and store the result of each call in an Elixir agent. This includes the name, light years from earth, right ascension and declination of each star.
+      </.p>
+      <.p class="py-2">
+        We then use the input from the speed options to calculate the distance between the two stars and return the result to you.
+      </.p>
+      <.p class="py-2">
+        We use trigonometry and the light year distance between earth and each star, their right ascension and declination to calculate the distance between them. The trigonometry can be seen
+        <a
+          href="https://github.com/tomo10/portfolio/blob/main/lib/ad_astra/trigonometry.ex"
+          target="_blank"
+          class="font-semibold"
+        >
+          here
+        </a>
       </.p>
 
       <div class="flex justify-end">

@@ -124,7 +124,10 @@ defmodule PortfolioWeb.Components.LandingPage do
                 </span>
               </div>
               <div class="mb-2 text-lg font-medium md:text-2xl">
-                <.link patch={feature.link_to}>
+                <.link :if={!feature.external} patch={feature.link_to}>
+                  <%= feature.title %>
+                </.link>
+                <.link :if={feature.external} href={feature.link_to} target="_blank">
                   <%= feature.title %>
                 </.link>
               </div>

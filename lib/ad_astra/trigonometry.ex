@@ -7,7 +7,6 @@ defmodule AdAstra.Trigonometry do
     |> Enum.map(&to_number/1)
   end
 
-  @spec declination_to_number(binary) :: list
   def declination_to_number(decl) do
     String.split(decl, ~r/[^0-9.-]+/)
     |> Enum.reject(&(String.trim(&1) == ""))
@@ -69,7 +68,7 @@ defmodule AdAstra.Trigonometry do
   end
 
   @doc """
-  This takes in 2 star names, their distance from earth in light years, and returns distance in light years
+  This takes in 2 stars, their distance from earth in light years, right ascension and declination values, and returns distance in light years
   """
   def calculate_two_stars(star1, star2, r1, r2) do
     decl1 = declination_total_parse(star1.declination)
@@ -107,8 +106,6 @@ defmodule AdAstra.Trigonometry do
         light_years * 1_092_833
     end
     |> Number.Delimit.number_to_delimited(precision: 0)
-
-    # |> :erlang.float_to_binary(decimals: 0)
   end
 
   defp right_asc_total_parse(right_asc) do
