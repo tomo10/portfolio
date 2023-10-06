@@ -1,17 +1,29 @@
 <.container class="py-16">
-  <.h2><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
-  <.h4>
-    Built this little project because I'm constantly boring my friends about how vast space is
-  </.h4>
-  <.h4>
-    Enter the names of any 2 stars you can see in the night sky. Then select the speed at which you'd like to travel between them...
-  </.h4>
-  <.a
-    type="live_patch"
-    class="inline-block bg-secondary-500 hover:bg-secondary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-secondary-700"
-    to="ad-astra/modal"
-    label="How it works"
-  />
+  <div class="pb-4">
+    <div class="pb-12 flex flex-col items-center justify-center">
+      <.h2 class="py-4"><%= gettext("Ad Astra", name: user_name(@current_user)) %> 🚀</.h2>
+      <img
+        id="ad-astra-image"
+        class="rounded-lg lg:max-w-lg max-h-lg"
+        src={~p"/images/ad_astra/jw_deep_field.jpeg"}
+        alt=""
+      />
+    </div>
+    <.h4>
+      Built this project because I'm constantly boring my friends about how vast space is
+    </.h4>
+    <.h4>
+      Enter the names of any 2 stars you can see in the night sky. Then select the speed at which you'd like to travel between them...
+    </.h4>
+  </div>
+  <div class="pt-4">
+    <.a
+      type="live_patch"
+      class="inline-block bg-secondary-500 hover:bg-secondary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-secondary-700"
+      to="ad-astra/modal"
+      label="How it works"
+    />
+  </div>
 
   <%= if @live_action == :modal do %>
     <.modal max_width="md" title="How it works">
@@ -20,13 +32,13 @@
         <a href="https://api-ninjas.com/api/stars" target="_blank" class="font-semibold">
           https://api-ninjas.com/api/stars
         </a>
-        endpoint and store the result of each call in an Elixir agent. This includes the name, light years from earth, right ascension and declination of each star.
+        endpoint and store the result of each call in an Elixir agent. This includes the name, light years from earth, right ascension and declination of each star
       </.p>
       <.p class="py-2">
-        We then use the input from the speed options to calculate the distance between the two stars and return the result to you.
+        We then use the input from your selected speed to calculate the distance between the two stars and return the result to you
       </.p>
       <.p class="py-2">
-        We use trigonometry and the light year distance between earth and each star, their right ascension and declination to calculate the distance between them. The trigonometry can be seen
+        We use trigonometry taking the light year distance between earth and each star, their right ascension and declination to calculate the distance between them. The trigonometry can be seen
         <a
           href="https://github.com/tomo10/portfolio/blob/main/lib/ad_astra/trigonometry.ex"
           target="_blank"
@@ -70,16 +82,19 @@
       />
       <.button>Calculate</.button>
     </.form>
-    <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
-      <div :if={@star_2.name != nil} class="flex flex-row">
-        <.star star={@star_1} />
-        <.star star={@star_2} />
-      </div>
-      <div :if={@result}>
-        <.h4>
-          How many years to travel between them at the speed of <%= @speed %>: <%= @result %>
-        </.h4>
-      </div>
+  </div>
+  <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
+    <div :if={@star_2.name != nil} class="flex flex-row">
+      <.star star={@star_1} />
+      <.star star={@star_2} />
+    </div>
+    <div :if={@result} class="flex flex-col items-center">
+      <.h4>
+        It would take this long to travel between these stars going at the speed of <%= @speed %>
+      </.h4>
+      <.h2>
+        <%= @result %> years
+      </.h2>
     </div>
   </div>
 </.container>

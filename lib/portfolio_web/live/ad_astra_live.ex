@@ -59,12 +59,7 @@ defmodule PortfolioWeb.AdAstraLive do
   end
 
   def calculate_journey_time(star_1, star_2, speed) do
-    Trigonometry.calculate_two_stars(
-      star_1,
-      star_2,
-      star_1.distance_light_year,
-      star_2.distance_light_year
-    )
+    Trigonometry.calculate_two_stars(star_1, star_2)
     |> Trigonometry.convert_speed(speed)
   end
 end

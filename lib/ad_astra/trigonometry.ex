@@ -73,14 +73,14 @@ defmodule AdAstra.Trigonometry do
   @doc """
   This takes in 2 stars, their distance from earth in light years, right ascension and declination values, and returns distance in light years
   """
-  def calculate_two_stars(star1, star2, r1, r2) do
+  def calculate_two_stars(star1, star2) do
     decl1 = declination_total_parse(star1.declination)
     decl2 = declination_total_parse(star2.declination)
     right_asc1 = right_asc_total_parse(star1.right_ascension)
     right_asc2 = right_asc_total_parse(star2.right_ascension)
 
-    [x1, y1, z1] = rectangle_coordinates(right_asc1, decl1, r1)
-    [x2, y2, z2] = rectangle_coordinates(right_asc2, decl2, r2)
+    [x1, y1, z1] = rectangle_coordinates(right_asc1, decl1, star1.distance_light_year)
+    [x2, y2, z2] = rectangle_coordinates(right_asc2, decl2, star2.distance_light_year)
 
     [dx, dy, dz] = rectangluar_coordinates_delta(x1, y1, z1, x2, y2, z2)
 
