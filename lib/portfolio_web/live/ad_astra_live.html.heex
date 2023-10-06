@@ -76,7 +76,9 @@
         <.star star={@star_2} />
       </div>
       <div :if={@result}>
-        <.h4>How many years to travel between them: <%= @result %></.h4>
+        <.h4>
+          How many years to travel between them at the speed of <%= @speed %>: <%= @result %>
+        </.h4>
       </div>
     </div>
   </div>

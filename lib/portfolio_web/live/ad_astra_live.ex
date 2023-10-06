@@ -12,6 +12,7 @@ defmodule PortfolioWeb.AdAstraLive do
       assign(
         socket,
         result: nil,
+        speed: "",
         star_1: %Star{},
         star_2: %Star{},
         form: to_form(form_params)
@@ -41,8 +42,10 @@ defmodule PortfolioWeb.AdAstraLive do
     case Api.fetch_stars(params["star_name_1"], params["star_name_2"]) do
       {:ok, stars} ->
         [star1, star2] = stars
-        result = calculate(star1, star2, params["speed"])
-        {:noreply, assign(socket, star_1: star1, star_2: star2, result: result)}
+        result = calculate_journey_time(star1, star2, params["speed"])
+        speed = Trigonometry.map_speed(params["speed"])
+
+        {:noreply, assign(socket, star_1: star1, star_2: star2, speed: speed, result: result)}
 
       {:error, msg} ->
         {:noreply, put_flash(socket, :error, msg)}
@@ -55,7 +58,7 @@ defmodule PortfolioWeb.AdAstraLive do
     {:noreply, push_patch(socket, to: "/ad-astra")}
   end
 
-  def calculate(star_1, star_2, speed) do
+  def calculate_journey_time(star_1, star_2, speed) do
     Trigonometry.calculate_two_stars(
       star_1,
       star_2,

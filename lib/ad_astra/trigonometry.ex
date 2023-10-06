@@ -24,6 +24,9 @@ defmodule AdAstra.Trigonometry do
     [d, m, s]
   end
 
+  @doc """
+  Formats a string to a number or a float
+  """
   defp to_number(str) do
     if String.contains?(str, ".") do
       String.to_float(str)
@@ -106,6 +109,22 @@ defmodule AdAstra.Trigonometry do
         light_years * 1_092_833
     end
     |> Number.Delimit.number_to_delimited(precision: 0)
+  end
+
+  def map_speed(speed) do
+    case speed do
+      "1" ->
+        "light"
+
+      "2" ->
+        "Voyager 1"
+
+      "3" ->
+        "a Space Shuttle"
+
+      "4" ->
+        "a Jumbo Jet"
+    end
   end
 
   defp right_asc_total_parse(right_asc) do
