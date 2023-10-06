@@ -10,7 +10,7 @@ defmodule PortfolioWeb.Components.LandingPage do
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
   slot :title
   slot :description
-  slot :cloud_logo
+  slot :about_me
   slot :action_buttons
 
   def hero(assigns) do
@@ -31,6 +31,9 @@ defmodule PortfolioWeb.Components.LandingPage do
                 <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
                   <%= render_slot(@description) %>
                 </p>
+                <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+                  <%= render_slot(@about_me) %>
+                </p>
               </div>
               <div class="space-x-2 text-center lg:text-left fade-in-animation">
                 <%= render_slot(@action_buttons) %>
@@ -48,12 +51,6 @@ defmodule PortfolioWeb.Components.LandingPage do
             </div>
           </div>
         </div>
-
-        <%= if length(@cloud_logo) > 0 do %>
-          <div class="mt-40">
-            <.logo_cloud title={@logo_cloud_title} cloud_logo={@cloud_logo} />
-          </div>
-        <% end %>
       </.container>
     </section>
     """
