@@ -92,19 +92,7 @@
 
       <div class="flex items-center justify-end ml-auto lg:w-3/12">
         <div class="flex items-center gap-3 mr-4">
-          <.language_select
-            current_locale={Gettext.get_locale(PortfolioWeb.Gettext)}
-            language_options={Portfolio.config(:language_options)}
-          />
           <.color_scheme_switch />
-        </div>
-
-        <div class="hidden md:block">
-          <.user_menu_dropdown
-            user_menu_items={user_menu_items(@current_user)}
-            avatar_src={user_avatar_url(@current_user)}
-            current_user_name={user_name(@current_user)}
-          />
         </div>
 
         <div
@@ -182,7 +170,6 @@
         <.list_menu_items
           li_class="mb-2 last:mb-0"
           a_class="inline-block font-medium capitalize menu-item dark:text-gray-400"
-          menu_items={user_menu_items(@current_user)}
         />
       </ul>
     </div>

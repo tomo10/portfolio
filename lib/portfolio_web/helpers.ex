@@ -8,10 +8,6 @@ defmodule PortfolioWeb.Helpers do
     PortfolioWeb.Menus.main_menu_items(current_user)
   end
 
-  def user_menu_items(current_user) do
-    PortfolioWeb.Menus.user_menu_items(current_user)
-  end
-
   def public_menu_items(current_user) do
     PortfolioWeb.Menus.public_menu_items(current_user)
   end

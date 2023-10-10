@@ -28,31 +28,6 @@ defmodule PortfolioWeb.Menus do
         current_user
       )
 
-  # Signed out user menu
-  def user_menu_items(nil),
-    do:
-      build_menu(
-        [
-          :sign_in,
-          :register
-        ],
-        nil
-      )
-
-  # Signed in user menu
-  def user_menu_items(current_user),
-    do:
-      build_menu(
-        [
-          :dashboard,
-          :settings,
-          :admin,
-          :dev,
-          :sign_out
-        ],
-        current_user
-      )
-
   def build_menu(menu_items, current_user \\ nil) do
     Enum.map(menu_items, fn menu_item ->
       cond do

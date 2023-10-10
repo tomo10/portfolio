@@ -68,7 +68,6 @@ defmodule PortfolioWeb.CoreComponents do
   attr :current_user, :map, default: nil
   attr :public_menu_items, :list
   attr :main_menu_items, :list
-  attr :user_menu_items, :list
   attr :avatar_src, :string
   attr :current_user_name, :string
   attr :sidebar_title, :string, default: nil
@@ -83,7 +82,6 @@ defmodule PortfolioWeb.CoreComponents do
       assigns
       |> assign_new(:public_menu_items, fn -> public_menu_items(assigns[:current_user]) end)
       |> assign_new(:main_menu_items, fn -> main_menu_items(assigns[:current_user]) end)
-      |> assign_new(:user_menu_items, fn -> user_menu_items(assigns[:current_user]) end)
       |> assign_new(:current_user_name, fn -> user_name(assigns[:current_user]) end)
       |> assign_new(:avatar_src, fn -> user_avatar_url(assigns[:current_user]) end)
       |> assign_new(:home_path, fn -> home_path(assigns[:current_user]) end)
