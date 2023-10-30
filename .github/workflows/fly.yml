@@ -2,17 +2,14 @@ name: Deploy to fly
 on:
   push:
     branches:
-      - fly
+      - master
 jobs:
   deploy:
-    name: Deploy proxy
+    name: Deploy app
     runs-on: ubuntu-latest
     steps:
-      # This step checks out a copy of your repository.
-      - uses: actions/checkout@v2
-      # This step runs `flyctl deploy`.
-      - uses: superfly/flyctl-actions@master
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        with:
-          args: "deploy --remote-only"
