@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - run: flyctl deploy --remote-only \
+          --build-secret PETAL_LICENSE_KEY=${{ secrets.PETAL_LICENSE_KEY }} \
+          --build-secret PETAL_PUBLIC_KEY=${{ secrets.PETAL_PUBLIC_KEY }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
