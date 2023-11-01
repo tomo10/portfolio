@@ -56,14 +56,14 @@ defmodule TrigonometryTest do
   test "Calc distance between two stars given initial data" do
     sirius = %{
       declination: "-16°  42′  58″",
-      distance_light_year: 8.6,
+      distance_light_year: "8.6",
       name: "Sirius",
       right_ascension: "06h 45m 8.9s"
     }
 
     vega = %{
       declination: "+38°  47′  01″",
-      distance_light_year: 25.3,
+      distance_light_year: "25.3",
       name: "Vega",
       right_ascension: "18h 36m 56.19s"
     }
