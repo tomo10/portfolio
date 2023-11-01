@@ -47,8 +47,8 @@ defmodule PortfolioWeb.Router do
 
     live_session :public, layout: {PortfolioWeb.Layouts, :public} do
       # Add public live routes here
-      live "ad-astra", AdAstraLive, :index
-      live "ad-astra/modal", AdAstraLive, :modal
+      live "/ad-astra", AdAstraLive, :index
+      live "/ad-astra/modal", AdAstraLive, :modal
     end
   end
 
