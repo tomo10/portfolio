@@ -649,6 +649,7 @@ defmodule Portfolio.Accounts do
         target_user_id: target_user_id
       }) do
     Portfolio.Logs.log_async("restore_impersonator", %{user: user, target_user_id: target_user_id})
+
     update_last_signed_in_info(user, ip)
   end
 

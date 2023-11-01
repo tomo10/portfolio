@@ -1,39 +1,6 @@
 defmodule AdAstra.Trigonometry do
   import Number
-
-  def right_asc_to_number(right_asc) do
-    String.split(right_asc, ~r/[^0-9.-]+/)
-    |> Enum.reject(&(String.trim(&1) == ""))
-    |> Enum.map(&to_number/1)
-  end
-
-  def declination_to_number(decl) do
-    String.split(decl, ~r/[^0-9.-]+/)
-    |> Enum.reject(&(String.trim(&1) == ""))
-    |> check_array()
-    |> Enum.map(&to_number/1)
-  end
-
-  def check_array(arr) when length(arr) > 1, do: arr
-
-  def check_array(arr) when length(arr) == 1 do
-    string = hd(arr)
-    d = String.split_at(string, 2) |> elem(0)
-    m = String.split_at(string, 4) |> elem(0)
-    s = String.split_at(string, 6) |> elem(1)
-    [d, m, s]
-  end
-
-  @doc """
-  Formats a string to a number or a float
-  """
-  defp to_number(str) do
-    if String.contains?(str, ".") do
-      String.to_float(str)
-    else
-      String.to_integer(str)
-    end
-  end
+  alias AdAstra.DataParsing
 
   def right_asc_to_degrees(right_asc_arr) do
     [h, m, s] = right_asc_arr
@@ -52,7 +19,7 @@ defmodule AdAstra.Trigonometry do
   def rectangle_coordinates(right_asc, decl, r) do
     right_asc = to_radians(right_asc)
     decl = to_radians(decl)
-    r = to_number(r)
+    r = DataParsing.to_number(r)
 
     x = r * :math.cos(right_asc) * :math.cos(decl)
     y = r * :math.sin(right_asc) * :math.cos(decl)
@@ -129,13 +96,13 @@ defmodule AdAstra.Trigonometry do
 
   defp right_asc_total_parse(right_asc) do
     right_asc
-    |> right_asc_to_number()
+    |> DataParsing.right_asc_to_number()
     |> right_asc_to_degrees()
   end
 
   defp declination_total_parse(declination) do
     [d, m, s] =
-      declination_to_number(declination)
+      DataParsing.declination_to_number(declination)
 
     declination_to_degrees([d, m, s])
   end

@@ -3,13 +3,17 @@ defmodule TrigonometryTest do
 
   import AdAstra.Trigonometry,
     only: [
-      right_asc_to_number: 1,
-      declination_to_number: 1,
       right_asc_to_degrees: 1,
       declination_to_degrees: 1,
       rectangle_coordinates: 3,
       distance_between_stars: 3,
-      calculate_two_stars: 4
+      calculate_two_stars: 2
+    ]
+
+  import AdAstra.DataParsing,
+    only: [
+      right_asc_to_number: 1,
+      declination_to_number: 1
     ]
 
   test "Check the strings are formatted correctly to ints and floats" do
@@ -49,21 +53,21 @@ defmodule TrigonometryTest do
     assert distance_between_stars(2, 8, 12) == 14.56
   end
 
-  test "Calc distance between two start given initial data" do
+  test "Calc distance between two stars given initial data" do
     sirius = %{
       declination: "-16°  42′  58″",
-      distance_light_year: 25,
+      distance_light_year: 8.6,
       name: "Sirius",
       right_ascension: "06h 45m 8.9s"
     }
 
     vega = %{
       declination: "+38°  47′  01″",
-      distance_light_year: 25,
+      distance_light_year: 25.3,
       name: "Vega",
       right_ascension: "18h 36m 56.19s"
     }
 
-    assert calculate_two_stars(sirius, vega, "8.6", "25.3") == 33.42
+    assert calculate_two_stars(sirius, vega) == 33.42
   end
 end
