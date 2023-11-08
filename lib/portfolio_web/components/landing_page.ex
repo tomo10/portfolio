@@ -83,12 +83,12 @@ defmodule PortfolioWeb.Components.LandingPage do
 
   attr :title, :string, required: true
   attr :description, :string
-  # attr :link_to, :string, required: true
+  # attr :link_to, :string
 
   attr :features, :list,
     default: [],
     doc:
-      "A list of features, which are maps with the keys :icon (a HeroiconV1), :title and :description"
+      "A list of projects, which are maps with the keys :icon (a HeroiconV1), :title and :description"
 
   attr :grid_classes, :string,
     default: "md:grid-cols-3",
@@ -139,53 +139,34 @@ defmodule PortfolioWeb.Components.LandingPage do
     """
   end
 
-  attr :title, :string, required: true
-  attr :description, :string, required: true
-  attr :image_src, :string, required: true
-  attr :inverted, :boolean, default: false
-  attr :background_color, :string, default: "primary"
-  attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
-  slot :inner_block
+  attr :blogs, :list,
+    default: [],
+    doc:
+      "A list of blogs, which are maps with the keys :icon (a HeroiconV1), :title and :description"
 
-  def solo_feature(assigns) do
+  attr :grid_classes, :string,
+    default: "md:grid-cols-2",
+    doc: "Tailwind grid cols class to specify how many columns you want"
+
+  attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
+
+  def blogs(assigns) do
     ~H"""
     <section
-      id="benefits"
-      class="overflow-hidden transition duration-500 ease-in-out bg-gray-50 md:pt-0 dark:bg-gray-800 dark:text-white"
-      data-offset="false"
+      id="blogs"
+      class="relative z-10 py-16 text-center transition duration-500 ease-in-out bg-white md:py-32 dark:bg-gray-900 dark:text-white"
     >
-      <.container max_width={@max_width}>
-        <div class={
-          "#{if @inverted, do: "flex-row-reverse", else: ""} flex flex-wrap items-center gap-20 py-32 md:flex-nowrap"
-        }>
-          <div class="md:w-1/2 stagger-fade-in-animation">
-            <div class="mb-5 text-3xl font-bold md:mb-7 fade-in-animation md:text-5xl">
-              <%= @title %>
+      <.container max_width={@max_width} class="relative z-10">
+        <div class={["grid stagger-fade-in-animation gap-y-8", @grid_classes]}>
+          <%= for blog <- @blogs do %>
+            <div class="px-8 mb-10 border-gray-200 md:px-16 fade-in-animation last:border-0">
+              <.card>
+                <.card_content category="Article" class="max-w-sm" heading={blog.title}>
+                  <%= blog.description %>
+                </.card_content>
+              </.card>
             </div>
-
-            <div class="space-y-4 text-lg font-light md:text-xl md:space-y-5">
-              <p class="fade-in-animation">
-                <%= @description %>
-              </p>
-            </div>
-            <%= if render_slot(@inner_block) do %>
-              <div class="fade-in-animation">
-                <%= render_slot(@inner_block) %>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="w-full md:w-1/2 md:mt-0">
-            <div class={
-              "#{if @background_color == "primary", do: "from-primary-200 to-primary-600 bg-primary-animation"} #{if @background_color == "secondary", do: "from-secondary-200 to-secondary-600 bg-secondary-animation"} relative flex items-center justify-center w-full p-16 bg-gradient-to-r rounded-3xl"
-            }>
-              <img
-                class="z-10 w-full fade-in-animation solo-animation max-h-[500px]"
-                src={@image_src}
-                alt="Screenshot"
-              />
-            </div>
-          </div>
+          <% end %>
         </div>
       </.container>
     </section>

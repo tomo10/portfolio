@@ -51,6 +51,14 @@
       external: false
     },
     %{
+      title: "AFR Sentiment",
+      description:
+        "A webscraper built for a trader client using Crawly library to analyse the Australian Financial Review. Runs sentiment analysis on the headlines using Nx and Bumbleebee",
+      icon: :globe_alt,
+      link_to: "https://github.com/tomo10/pangaea_pro",
+      external: true
+    },
+    %{
       title: "Pangaea",
       description:
         "A conservation crowdfunding platform and planet centric social network. Conservation has no borders",
@@ -69,6 +77,23 @@
   ]}
   max_width={max_width}
 />
+
+<LandingPage.blogs blogs={[
+  %{
+    title: "AFR Web Scraper",
+    description:
+      "How to create an end-to-end machine lerning pipeline using Nx, Bumblebee, and Crawly",
+    link_to: "/ad-astra",
+    external: false
+  },
+  %{
+    title: "Ad Astra",
+    description:
+      "Type in any 2 stars to find out the distance between them and how long it would take to travel from one to the other at various speeds. To the stars!",
+    link_to: "/ad-astra",
+    external: false
+  }
+]} />
 
 <LandingPage.contact
   max_width={max_width}

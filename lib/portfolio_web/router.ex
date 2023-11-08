@@ -44,6 +44,7 @@ defmodule PortfolioWeb.Router do
     get "/", PageController, :landing_page
     get "/privacy", PageController, :privacy
     get "/license", PageController, :license
+    get "/articles/:slug", PageController, :articles
 
     live_session :public, layout: {PortfolioWeb.Layouts, :public} do
       # Add public live routes here
