@@ -18,10 +18,12 @@ defmodule PortfolioWeb.PageController do
 
     case File.read(article_path) do
       {:ok, markdown_content} ->
+        html_doc = Earmark.as_html!(markdown_content)
+
         render(
           conn,
           "article.html",
-          markdown_content: markdown_content
+          markdown_content: html_doc
         )
 
       {:error, _reason} ->

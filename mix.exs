@@ -111,6 +111,9 @@ defmodule Portfolio.MixProject do
       # Libs for Ad Astra number formatting
       {:number, "~> 1.0.1"},
 
+      # For markdown to html rendering
+      {:earmark, "~> 1.4"},
+
       # Testing
       {:wallaby, "~> 0.30", runtime: false, only: :test},
       {:faker, "~> 0.17", only: [:test, :dev]},
