@@ -8,8 +8,6 @@ defmodule Portfolio.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      Portfolio.Repo,
       # Start the Telemetry supervisor
       PortfolioWeb.Telemetry,
       # Start the PubSub system
