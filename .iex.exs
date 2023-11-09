@@ -10,7 +10,6 @@ alias Portfolio.MailBluster
 alias Portfolio.Orgs
 alias Portfolio.Orgs.Invitation
 alias Portfolio.Orgs.Membership
-alias Portfolio.Repo
 alias Portfolio.Slack
 
 # Don't cut off inspects with "..."

@@ -8,13 +8,6 @@ config :bcrypt_elixir, :log_rounds, 1
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :portfolio, Portfolio.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "portfolio_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: 10
 
 config :portfolio, PortfolioWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],

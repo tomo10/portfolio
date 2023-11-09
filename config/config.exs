@@ -32,11 +32,11 @@ config :portfolio,
 
 # Petal Pro features:
 #   - impersonation_enabled?: Allows admins to impersonate users
-config :portfolio,
-  impersonation_enabled?: true
+# config :portfolio,
+#   impersonation_enabled?: true
 
-config :portfolio,
-  ecto_repos: [Portfolio.Repo]
+# config :portfolio,
+#   ecto_repos: [Portfolio.Repo]
 
 # Configures the endpoint
 config :portfolio, PortfolioWeb.Endpoint,
@@ -90,27 +90,6 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
-# Oban:
-# Queues are specified as a keyword list where the key is the name of the queue and the value is the maximum number of concurrent jobs.
-# The following configuration would start four queues with concurrency ranging from 5 to 50: [default: 10, mailers: 20, events: 50, media: 5]
-# For now we just have one default queue with up to 5 concurrent jobs (as our database only accepts up to 10 connections so we don't want to overload it)
-# Oban provides active pruning of completed, cancelled and discarded jobs - we retain jobs for 24 hours
-config :portfolio, Oban,
-  repo: Portfolio.Repo,
-  queues: [default: 5],
-  plugins: [
-    {Oban.Plugins.Pruner, max_age: 3600 * 24},
-    {Oban.Plugins.Cron,
-     crontab: [
-       # {"@daily", Portfolio.Workers.ExampleWorker}
-       # {"* * * * *", EveryMinuteWorker},
-       # {"0 * * * *", EveryHourWorker},
-       # {"0 */6 * * *", EverySixHoursWorker},
-       # {"0 0 * * SUN", EverySundayWorker},
-       # More examples: https://crontab.guru/examples.html
-     ]}
-  ]
-
 # Specify which languages you support
 # To create .po files for a language run `mix gettext.merge priv/gettext --locale fr`
 # (fr is France, change to whatever language you want - make sure it's included in the locales config below)
@@ -161,7 +140,7 @@ config :portfolio, :content_security_policy, %{
   ]
 }
 
-config :flop, repo: Portfolio.Repo, default_limit: 20
+# config :flop, repo: Portfolio.Repo, default_limit: 20
 config :tesla, :adapter, {Tesla.Adapter.Finch, name: Portfolio.Finch}
 config :petal_framework, :translation_helper_module, PortfolioWeb.PetalFrameworkTranslations
 
