@@ -4,20 +4,7 @@ defmodule PortfolioWeb.Helpers do
   @moduledoc """
   A set of helpers used in web related views and templates. These functions can be called anywhere in a heex template.
   """
-  def main_menu_items(current_user) do
-    PortfolioWeb.Menus.main_menu_items(current_user)
-  end
-
-  def public_menu_items(current_user) do
-    PortfolioWeb.Menus.public_menu_items(current_user)
-  end
-
-  def get_menu_item(name, current_user) do
-    PortfolioWeb.Menus.get_link(name, current_user)
-  end
-
   def home_path(nil), do: "/"
-  def home_path(_current_user), do: ~p"/app"
 
   # Always use this when rendering a user's name
   # This way, if you want to change to something like "user.first_name user.last_name", you only have to change one place

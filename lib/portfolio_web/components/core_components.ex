@@ -4,9 +4,6 @@ defmodule PortfolioWeb.CoreComponents do
   use PetalComponents
   use PetalFramework
 
-  import PortfolioWeb.Helpers
-  import PortfolioWeb.Gettext
-
   # SETUP_TODO
   # This module relies on the following images. Replace these images with your logos.
   # We created a Figma file to easily create and import these assets: https://www.figma.com/community/file/1139155923924401853
@@ -78,14 +75,6 @@ defmodule PortfolioWeb.CoreComponents do
   slot :logo
 
   def layout(assigns) do
-    assigns =
-      assigns
-      |> assign_new(:public_menu_items, fn -> public_menu_items(assigns[:current_user]) end)
-      |> assign_new(:main_menu_items, fn -> main_menu_items(assigns[:current_user]) end)
-      |> assign_new(:current_user_name, fn -> user_name(assigns[:current_user]) end)
-      |> assign_new(:avatar_src, fn -> user_avatar_url(assigns[:current_user]) end)
-      |> assign_new(:home_path, fn -> home_path(assigns[:current_user]) end)
-
     ~H"""
     <%= case @type do %>
       <% "sidebar" -> %>
@@ -115,57 +104,6 @@ defmodule PortfolioWeb.CoreComponents do
           </:top_right>
           <%= render_slot(@inner_block) %>
         </.stacked_layout>
-    <% end %>
-    """
-  end
-
-  # Shows the login buttons for all available providers. Can add a break "Or login with"
-  attr :or_location, :string, default: "", values: ["top", "bottom", ""]
-  attr :or_text, :string, default: "Or"
-  attr :conn_or_socket, :any
-
-  def auth_providers(assigns) do
-    ~H"""
-    <%= if auth_provider_loaded?("google") || auth_provider_loaded?("github") || auth_provider_loaded?("passwordless") do %>
-      <%= if @or_location == "top" do %>
-        <.or_break or_text={@or_text} />
-      <% end %>
-
-      <div class="flex flex-col gap-2">
-        <%= if auth_provider_loaded?("passwordless") do %>
-          <.link
-            navigate={~p"/auth/sign-in/passwordless"}
-            class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-900 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:border-gray-400 focus:bg-gray-100 focus:text-gray-900 active:border-gray-400 active:bg-gray-200 active:text-black dark:text-gray-300 dark:focus:text-gray-100 dark:active:text-gray-100 dark:hover:text-gray-200 dark:bg-transparent dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:border-gray-500 dark:focus:border-gray-300 dark:active:border-gray-300"
-          >
-            <Heroicons.envelope class="w-5 h-5" />
-            <span class="ml-2"><%= gettext("Continue with passwordless") %></span>
-          </.link>
-        <% end %>
-
-        <%= if auth_provider_loaded?("google") do %>
-          <.social_button
-            link_type="a"
-            to={~p"/auth/google"}
-            variant="outline"
-            logo="google"
-            class="w-full"
-          />
-        <% end %>
-
-        <%= if auth_provider_loaded?("github") do %>
-          <.social_button
-            link_type="a"
-            to={~p"/auth/github"}
-            variant="outline"
-            logo="github"
-            class="w-full"
-          />
-        <% end %>
-      </div>
-
-      <%= if @or_location == "bottom" do %>
-        <.or_break or_text={@or_text} />
-      <% end %>
     <% end %>
     """
   end

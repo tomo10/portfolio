@@ -62,7 +62,7 @@ defmodule PortfolioWeb do
       use Phoenix.LiveView,
         layout: {PortfolioWeb.Layouts, :app}
 
-      on_mount({PortfolioWeb.UserOnMountHooks, :maybe_assign_user})
+      # on_mount({PortfolioWeb.UserOnMountHooks, :maybe_assign_user})
       on_mount(PortfolioWeb.RestoreLocaleHook)
       on_mount(PortfolioWeb.AllowEctoSandboxHook)
       on_mount({PortfolioWeb.ViewSetupHook, :reset_page_title})

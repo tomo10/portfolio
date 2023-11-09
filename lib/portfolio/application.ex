@@ -16,10 +16,7 @@ defmodule Portfolio.Application do
       PortfolioWeb.Endpoint,
       {Task.Supervisor, name: Portfolio.BackgroundTask},
       # HTTP adapter for Tesla
-      {Finch, name: Portfolio.Finch},
-      {Oban, Application.fetch_env!(:portfolio, Oban)}
-      # Start a worker by calling: Portfolio.Worker.start_link(arg)
-      # {Portfolio.Worker, arg}
+      {Finch, name: Portfolio.Finch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

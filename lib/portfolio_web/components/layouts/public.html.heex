@@ -85,7 +85,10 @@
           <.list_menu_items
             li_class="ml-8 lg:mx-4 xl:mx-6"
             a_class="block font-medium leading-7 capitalize dark:text-gray-100 menu-item"
-            menu_items={public_menu_items(@current_user)}
+            menu_items={[
+              %{label: "Projects", path: "/#projects"},
+              %{label: "Contact", path: "/#contact"}
+            ]}
           />
         </ul>
       </div>
@@ -140,32 +143,11 @@
         <.list_menu_items
           li_class="mb-2 last:mb-0 dark:text-gray-400"
           a_class="inline-block font-medium capitalize menu-item"
-          menu_items={public_menu_items(@current_user)}
+          menu_items={[
+            %{label: "Projects", path: "/#projects"},
+            %{label: "Contact", path: "/#contact"}
+          ]}
         />
-
-        <%= if user_name(@current_user) do %>
-          <div class="pt-4 pb-3">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <%= if user_name(@current_user) || user_avatar_url(@current_user) do %>
-                  <.avatar
-                    name={user_name(@current_user)}
-                    src={user_avatar_url(@current_user)}
-                    size="sm"
-                    random_color
-                  />
-                <% else %>
-                  <.avatar size="sm" />
-                <% end %>
-              </div>
-              <div class="ml-3">
-                <div class="text-base font-medium text-gray-800 dark:text-gray-300">
-                  <%= user_name(@current_user) %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
 
         <.list_menu_items
           li_class="mb-2 last:mb-0"
@@ -193,7 +175,10 @@
               <.list_menu_items
                 li_class="w-full mb-2 md:w-auto md:mb-0"
                 a_class="text-gray-700 dark:text-gray-300 md:text-sm hover:text-gray-800 dark:hover:text-gray-400"
-                menu_items={public_menu_items(@current_user)}
+                menu_items={[
+                  %{label: "Projects", path: "/#projects"},
+                  %{label: "Contact", path: "/#contact"}
+                ]}
               />
             </ul>
           </div>
