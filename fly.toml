@@ -10,9 +10,6 @@ swap_size_mb = 512
 
 [build]
 
-[deploy]
-  release_command = "/app/bin/migrate"
-
 [env]
   PHX_HOST = "dark-snow-1832.fly.dev"
   PORT = "8080"
