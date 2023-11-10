@@ -1,5 +1,5 @@
 defmodule PortfolioWeb.LayoutViewTest do
-  use PortfolioWeb.ConnCase, async: true
+  # use PortfolioWeb.ConnCase, async: true
 
   # When testing helpers, you may want to import Phoenix.HTML and
   # use functions such as safe_to_string() to convert the helper
