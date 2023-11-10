@@ -159,12 +159,19 @@ defmodule PortfolioWeb.Components.LandingPage do
       <.container max_width={@max_width} class="relative z-10">
         <div class={["grid stagger-fade-in-animation gap-y-8", @grid_classes]}>
           <%= for blog <- @blogs do %>
-            <div class="px-8 mb-10 border-gray-200 md:px-16 fade-in-animation last:border-0">
-              <.card>
-                <.card_content category="Article" class="max-w-sm" heading={blog.title}>
-                  <%= blog.description %>
-                </.card_content>
-              </.card>
+            <div
+              class="rounded-lg shadow-lg overflow-hidden flex"
+              phx-click="go-to-article"
+              style="cursor: pointer;"
+            >
+              <div class="flex-1 p-4 text-left hover:bg-gray-800">
+                <h3 class="text-xl font-semibold mb-2"><%= blog.title %></h3>
+                <p class="text-sm text-gray-700 mb-4"><%= blog.description %></p>
+                <%!-- <button class="bg-gray-200 text-gray-700 py-2 px-4 rounded hover:bg-gray-300 focus:outline-none">
+                  Read
+                </button> --%>
+                <.button color="secondary" label="Read" variant="inverted" />
+              </div>
             </div>
           <% end %>
         </div>

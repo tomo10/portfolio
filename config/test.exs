@@ -32,6 +32,3 @@ config :portfolio, :env, :test
 # Wallaby related settings:
 config :wallaby, otp_app: :portfolio, screenshot_on_failure: true, js_logger: nil
 config :portfolio, :sandbox, Ecto.Adapters.SQL.Sandbox
-
-# Oban - Disable plugins, enqueueing scheduled jobs and job dispatching altogether when testing
-config :portfolio, Oban, testing: :inline

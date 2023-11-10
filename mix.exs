@@ -47,9 +47,6 @@ defmodule Portfolio.MixProject do
     [
       # Phoenix base
       {:phoenix, "~> 1.7.3"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.10"},
-      {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19"},
@@ -70,19 +67,6 @@ defmodule Portfolio.MixProject do
       {:gen_smtp, "~> 1.2"},
       {:premailex, "~> 0.3.0"},
 
-      # Ecto querying / pagination
-      {:query_builder, "~> 1.0"},
-
-      # Authentication
-      {:bcrypt_elixir, "~> 3.0"},
-      {:ueberauth, "~> 0.10"},
-      {:ueberauth_google, "~> 0.10"},
-      {:ueberauth_github, "~> 0.7"},
-
-      # TOTP (2FA)
-      {:nimble_totp, "~> 1.0.0"},
-      {:eqrcode, "~> 0.1.10"},
-
       # Hashing
       {:hashids, "~> 2.0"},
 
@@ -99,6 +83,10 @@ defmodule Portfolio.MixProject do
       {:inflex, "~> 2.1.0"},
       {:slugify, "~> 1.3"},
       {:sizeable, "~> 1.0"},
+
+      # Authentication
+      {:ueberauth, "~> 0.10"},
+      {:ueberauth_github, "~> 0.7"},
 
       # HTTP client
       {:tesla, "~> 1.7.0"},
@@ -117,9 +105,6 @@ defmodule Portfolio.MixProject do
       # Testing
       {:wallaby, "~> 0.30", runtime: false, only: :test},
       {:faker, "~> 0.17", only: [:test, :dev]},
-
-      # Jobs / Cron
-      {:oban, "~> 2.15.0"},
 
       # Security
       {:content_security_policy, "~> 1.0"},
