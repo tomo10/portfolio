@@ -13,35 +13,31 @@ defmodule PortfolioWeb.CustomComponents do
 
   def hero(assigns) do
     ~H"""
-    <section
-      id="hero"
-      class="bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800"
-    >
-      <.container max_width={@max_width} class="relative z-10 py-20">
-        <div class="flex flex-wrap items-center -mx-3">
-          <div class="w-full px-3 lg:w-1/2">
-            <div class="py-12">
-              <div class="max-w-lg mx-auto mb-8 text-center lg:max-w-md lg:mx-0 lg:text-left">
-                <.h1 class="fade-in-animation">
-                  <%= render_slot(@title) %>
-                </.h1>
+    <section id="hero" class="flex-1 from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <%!-- <div class="flex flex-wrap items-center -mx-3"> --%>
+      <div class="w-full px-8">
+        <div class="py-12">
+          <div class="max-w-lg mx-auto mb-8 text-center lg:max-w-md lg:mx-0 lg:text-left">
+            <.h1 class="fade-in-animation">
+              <%= render_slot(@title) %>
+            </.h1>
 
-                <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
-                  <%= render_slot(@description) %>
-                </p>
-                <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
-                  <%= render_slot(@about_me_1) %>
-                </p>
-                <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
-                  <%= render_slot(@about_me_2) %>
-                </p>
-              </div>
-              <div class="space-x-2 text-center lg:text-left fade-in-animation">
-                <%= render_slot(@action_buttons) %>
-              </div>
-            </div>
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+              <%= render_slot(@description) %>
+            </p>
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+              <%= render_slot(@about_me_1) %>
+            </p>
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+              <%= render_slot(@about_me_2) %>
+            </p>
           </div>
-          <div class="w-full px-3 mb-12 lg:w-1/2 lg:mb-0">
+          <div class="space-x-2 text-center lg:text-left fade-in-animation">
+            <%= render_slot(@action_buttons) %>
+          </div>
+        </div>
+      </div>
+      <%!-- <div class="bg-red-400 w-full px-3 mb-12 lg:w-1/2 lg:mb-0">
             <div class="flex items-center justify-center lg:h-128">
               <img
                 id="hero-image"
@@ -50,9 +46,51 @@ defmodule PortfolioWeb.CustomComponents do
                 alt=""
               />
             </div>
+          </div> --%>
+      <%!-- </div> --%>
+    </section>
+    """
+  end
+
+  attr :image_src, :string, required: true
+  attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
+  slot :form
+  slot :response
+
+  def aida(assigns) do
+    ~H"""
+    <section class="flex-1 from-white to-gray-100 py-12 dark:from-gray-900 dark:to-gray-800">
+      <div class="lg:h-128">
+        <div class="flex items-center justify-center lg:h-128">
+          <img
+            id="hero-image"
+            class="fade-in-from-right-animation rounded-full lg:max-w-lg max-h-[100px]"
+            src={@image_src}
+            alt=""
+          />
+        </div>
+
+        <%!-- <.h3>AIDA Prompt</.h3> --%>
+        <.form for={@form} phx-submit="submit">
+          <.field
+            field={@form[:question]}
+            placeholder="Ask me anything..."
+            help_text="e.g. What are you working on atm?  What are you looking for?"
+          />
+
+          <div class="flex justify-end">
+            <div class="flex gap-5">
+              <.button color="secondary" phx-disable-with="Loading...">Ask me</.button>
+            </div>
+          </div>
+        </.form>
+
+        <div :if={@response} class="mt-20">
+          <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
+            <%= @response %>
           </div>
         </div>
-      </.container>
+      </div>
     </section>
     """
   end

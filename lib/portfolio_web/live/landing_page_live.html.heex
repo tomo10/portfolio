@@ -1,43 +1,51 @@
 <%!-- This should match max_width in `public.html.heex`. Options: ["sm", "md", "lg", "xl", "full"] --%>
 <% max_width = "xl" %>
 
-<CC.hero
-  image_src={~p"/images/landing_page/moi.jpeg"}
-  logo_cloud_title={gettext("Trusted by brands all over the world*")}
-  max_width={max_width}
->
-  <:title>
-    <span><%= gettext("Thomas") %></span>
-    <span class="text-primary-600">
-      <%= gettext("Full Stack Engineer") %>
-    </span>
-    <span><%= gettext("Edwards") %></span>
-  </:title>
-  <:action_buttons>
-    <.button
-      label={gettext("Get in touch")}
-      link_type="a"
-      color="primary"
-      to="mailto:thce28@gmail.com"
-      size="lg"
-    />
-  </:action_buttons>
-  <:description>
-    <%= gettext(
-      "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, LiveView, React Native, and the PETAL stack."
-    ) %>
-  </:description>
-  <:about_me_1>
-    <%= gettext(
-      "I place great value on working with intelligent well rounded people who are passionate about what they do."
-    ) %>
-  </:about_me_1>
-  <:about_me_2>
-    <%= gettext(
-      "In my spare time I love exploring the great outdoors, playing sport, travelling, reading. Ability to work in the USA or UK."
-    ) %>
-  </:about_me_2>
-</CC.hero>
+<.container max_width={max_width} class="relative flex flex-row py-20">
+  <CC.hero
+    image_src={~p"/images/landing_page/moi.jpeg"}
+    logo_cloud_title={gettext("Trusted by brands all over the world*")}
+    max_width="lg"
+  >
+    <:title>
+      <span><%= gettext("Thomas") %></span>
+      <span class="text-primary-600">
+        <%= gettext("Full Stack Engineer") %>
+      </span>
+      <span><%= gettext("Edwards") %></span>
+    </:title>
+    <:action_buttons>
+      <.button
+        label={gettext("Get in touch")}
+        link_type="a"
+        color="primary"
+        to="mailto:thce28@gmail.com"
+        size="lg"
+      />
+    </:action_buttons>
+    <:description>
+      <%= gettext(
+        "Software Engineer with a passion for building Full Stack Mobile and Web applications in Elixir, LiveView, React Native, and the PETAL stack."
+      ) %>
+    </:description>
+    <:about_me_1>
+      <%= gettext(
+        "I place great value on working with intelligent well rounded people who are passionate about what they do."
+      ) %>
+    </:about_me_1>
+    <:about_me_2>
+      <%= gettext(
+        "In my spare time I love exploring the great outdoors, playing sport, travelling, reading. Ability to work in the USA or UK."
+      ) %>
+    </:about_me_2>
+  </CC.hero>
+  <CC.aida
+    image_src={~p"/images/landing_page/moi.jpeg"}
+    form={@form}
+    response={@response}
+    max_width="lg"
+  />
+</.container>
 
 <CC.projects
   title={gettext("Projects")}
