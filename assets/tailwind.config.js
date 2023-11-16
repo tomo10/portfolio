@@ -13,13 +13,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue,
-        secondary: colors.pink,
+        primary: colors.teal,
+        secondary: colors.orange,
         success: colors.green,
         danger: colors.red,
         warning: colors.yellow,
         info: colors.sky,
-        gray: colors.slate,
+        gray: colors.gray,
       },
     },
   },

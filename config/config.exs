@@ -20,7 +20,7 @@ import Config
 #   - github_url: (deletable) The URL to your Github account (used in the landing page footer)
 #   - discord_url: (deletable) The URL to your Discord invititation (used in the landing page footer)
 config :portfolio,
-  app_name: "Portfolio",
+  app_name: "THCE Portfolio",
   business_name: "Thomas Edwards Dev",
   support_email: "thce28@gmail.com",
   mailer_default_from_name: "Contact",

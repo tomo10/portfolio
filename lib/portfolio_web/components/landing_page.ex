@@ -10,7 +10,8 @@ defmodule PortfolioWeb.Components.LandingPage do
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
   slot :title
   slot :description
-  slot :about_me
+  slot :about_me_1
+  slot :about_me_2
   slot :action_buttons
 
   def hero(assigns) do
@@ -32,7 +33,10 @@ defmodule PortfolioWeb.Components.LandingPage do
                   <%= render_slot(@description) %>
                 </p>
                 <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
-                  <%= render_slot(@about_me) %>
+                  <%= render_slot(@about_me_1) %>
+                </p>
+                <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+                  <%= render_slot(@about_me_2) %>
                 </p>
               </div>
               <div class="space-x-2 text-center lg:text-left fade-in-animation">
@@ -44,7 +48,7 @@ defmodule PortfolioWeb.Components.LandingPage do
             <div class="flex items-center justify-center lg:h-128">
               <img
                 id="hero-image"
-                class="fade-in-from-right-animation rounded-lg lg:max-w-lg max-h-[300px]"
+                class="fade-in-from-right-animation rounded-full lg:max-w-lg max-h-[200px]"
                 src={@image_src}
                 alt=""
               />
