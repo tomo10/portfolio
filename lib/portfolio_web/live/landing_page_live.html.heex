@@ -1,7 +1,7 @@
 <%!-- This should match max_width in `public.html.heex`. Options: ["sm", "md", "lg", "xl", "full"] --%>
 <% max_width = "xl" %>
 
-<LandingPage.hero
+<CC.hero
   image_src={~p"/images/landing_page/moi.jpeg"}
   logo_cloud_title={gettext("Trusted by brands all over the world*")}
   max_width={max_width}
@@ -37,9 +37,9 @@
       "In my spare time I love exploring the great outdoors, playing sport, travelling, reading. Ability to work in the USA or UK."
     ) %>
   </:about_me_2>
-</LandingPage.hero>
+</CC.hero>
 
-<LandingPage.projects
+<CC.projects
   title={gettext("Projects")}
   description={
     gettext(
@@ -93,7 +93,7 @@
   }
 ]} /> --%>
 
-<LandingPage.contact
+<CC.contact
   max_width={max_width}
   socials={[
     %{

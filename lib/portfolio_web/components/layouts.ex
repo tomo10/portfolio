@@ -1,6 +1,6 @@
 defmodule PortfolioWeb.Layouts do
   use PortfolioWeb, :html
-  alias PortfolioWeb.Components.LandingPage
+  alias PortfolioWeb.CustomComponents, as: CC
 
   embed_templates "layouts/*"
 

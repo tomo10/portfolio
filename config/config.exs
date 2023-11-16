@@ -93,6 +93,8 @@ config :tailwind,
 # To configure our openai api keys
 config :langchain, openai_key: "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"
 config :langchain, openai_org_id: "org-Lx8ZdHwtk0dRTUwRKqwzC3IE"
+# config :langchain, openai_key: System.get_env("OPENAI_KEY")
+# config :langchain, openai_org_id: System.get_env("OPENAI_ORG_ID")
 
 # Specify which languages you support
 # To create .po files for a language run `mix gettext.merge priv/gettext --locale fr`

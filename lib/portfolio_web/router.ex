@@ -27,13 +27,14 @@ defmodule PortfolioWeb.Router do
     pipe_through [:browser, :public_layout]
 
     # Add public controller routes here
-    get "/", PageController, :landing_page
+    # get "/", PageController, :landing_page
     get "/privacy", PageController, :privacy
     get "/license", PageController, :license
     get "/articles/:slug", PageController, :articles
 
     live_session :public, layout: {PortfolioWeb.Layouts, :public} do
       # Add public live routes here
+      live "/", LandingPageLive, :index
       live "/ad-astra", AdAstraLive, :index
       live "/ad-astra/modal", AdAstraLive, :modal
     end
