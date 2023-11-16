@@ -90,6 +90,10 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
+# To configure our openai api keys
+config :langchain, openai_key: "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"
+config :langchain, openai_org_id: "org-Lx8ZdHwtk0dRTUwRKqwzC3IE"
+
 # Specify which languages you support
 # To create .po files for a language run `mix gettext.merge priv/gettext --locale fr`
 # (fr is France, change to whatever language you want - make sure it's included in the locales config below)

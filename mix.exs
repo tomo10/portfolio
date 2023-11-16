@@ -99,6 +99,11 @@ defmodule Portfolio.MixProject do
       # Libs for Ad Astra number formatting
       {:number, "~> 1.0.1"},
 
+      # For llm chaning
+      {:ecto, "~> 3.10.3"},
+      {:langchain, "~> 0.1.0"},
+      {:req, "~> 0.4.0"},
+
       # For markdown to html rendering
       {:earmark, "~> 1.4"},
 
