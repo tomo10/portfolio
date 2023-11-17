@@ -1,5 +1,6 @@
 defmodule PortfolioWeb.LandingPageLive do
   use PortfolioWeb, :live_view
+  alias Phoenix.LiveView.JS
   alias PortfolioWeb.CustomComponents, as: CC
 
   @impl true
@@ -11,8 +12,7 @@ defmodule PortfolioWeb.LandingPageLive do
         socket,
         page_title: "Ask Jeeves",
         form: to_form(form_params),
-        response:
-          "As an AI, I don't have personal preferences, but some popular films that people often enjoy are The Shawshank Redemption, The Godfather, and The Dark Knight."
+        response: ""
       )
 
     {:ok, socket}
@@ -20,8 +20,9 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def handle_event("submit", %{"question" => question}, socket) do
-    response = Aida.Llm.test_aida(question)
-
-    {:noreply, assign(socket, response: response.content)}
+    # response = Aida.Llm.test_aida(question)
+    response = "I'm sorry, my responses are limited. You must ask the right questions."
+    JS.show()
+    {:noreply, assign(socket, response: response)}
   end
 end
