@@ -14,7 +14,6 @@ defmodule PortfolioWeb.CustomComponents do
   def hero(assigns) do
     ~H"""
     <section id="hero" class="flex-1 from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <%!-- <div class="flex flex-wrap items-center -mx-3"> --%>
       <div class="w-full px-8">
         <div class="py-12">
           <div class="max-w-lg mx-auto mb-8 text-center lg:max-w-md lg:mx-0 lg:text-left">
@@ -37,17 +36,6 @@ defmodule PortfolioWeb.CustomComponents do
           </div>
         </div>
       </div>
-      <%!-- <div class="bg-red-400 w-full px-3 mb-12 lg:w-1/2 lg:mb-0">
-            <div class="flex items-center justify-center lg:h-128">
-              <img
-                id="hero-image"
-                class="fade-in-from-right-animation rounded-full lg:max-w-lg max-h-[200px]"
-                src={@image_src}
-                alt=""
-              />
-            </div>
-          </div> --%>
-      <%!-- </div> --%>
     </section>
     """
   end
@@ -71,16 +59,15 @@ defmodule PortfolioWeb.CustomComponents do
           />
         </div>
 
-        <%!-- <.h3>AIDA Prompt</.h3> --%>
         <.form for={@form} phx-submit="submit">
           <.field
             field={@form[:question]}
             placeholder="Ask me anything..."
-            help_text="e.g. What technology do you like using?"
+            help_text="e.g. What are you working on at the moment ? What are your hobbies ? Are aliens real ?"
           />
         </.form>
         <div class="flex justify-center">
-          <.spinner show={@loading} size="lg" class="text-secondary-500 mt-20" />
+          <.spinner show={@loading} size="lg" class="text-primary-500 mt-20" />
         </div>
         <div :if={@response} class="mt-20">
           <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
