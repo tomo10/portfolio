@@ -10,7 +10,6 @@ defmodule PortfolioWeb.LandingPageLive do
     socket =
       assign(
         socket,
-        page_title: "Ask Jeeves",
         form: to_form(form_params),
         response: nil,
         loading: false

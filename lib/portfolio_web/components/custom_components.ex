@@ -313,10 +313,6 @@ defmodule PortfolioWeb.CustomComponents do
       "List of maps with keys: :most_popular (bool), :name, :currency, :price, :unit, :description, :features (list of strings)"
 
   def load_js_animations(assigns) do
-    IO.inspect("------------------------------")
-    IO.inspect("load_js_animations...")
-    IO.inspect("------------------------------")
-
     ~H"""
     <script type="module">
       // Use GSAP for animations
