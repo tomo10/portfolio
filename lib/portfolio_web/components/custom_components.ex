@@ -218,7 +218,8 @@ defmodule PortfolioWeb.CustomComponents do
             </div>
           </div>
 
-          <div class="solo-animation fade-in-animation flickity">
+          <%!-- <div class="solo-animation fade-in-animation flickity"> --%>
+          <div class="flex flex-row">
             <%= for social <- @socials do %>
               <.contact_panel {social} />
             <% end %>

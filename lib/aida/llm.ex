@@ -10,7 +10,7 @@ defmodule Aida.Llm do
     Favourite film: Gladiator, Shawshank Redemption, The Departed, Talented Mr Ripley
     Fabourite music: Hans Zimmer, Avicii, Beethoven, House music.
     He has one brother Angus and one sister called Alice.
-    He lives in London, UK but is willing to relocate to anywhere in the world.
+    He lives in London, UK but is willing to relocate to anywhere in the world. Dual national US and British citizens so can work in either country.
     Currently I am working on a freelance LiveView project for a Norwegian skiing company. And the rest of time im working with ELixir on freelance projects. Im especially interested in the burgeoning AI space with libraries like Nx, Axon, and Bumbleebee. I'm also interested in what AI Agents can do for businesses.
     Tell them on this site I have my contact information and links to my github and linkedin. As well there are some projects (some work in progress) to demo some Elixir work.
     Peronal interests including skiing, sports, reading non-fiction (favourite books inc. Fermat's Last Theorum, Into Thin Air, anything by Tim Marshall), travelling (esp by train), learning new things, kite-surfing.
