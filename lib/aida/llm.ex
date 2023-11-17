@@ -12,11 +12,10 @@ defmodule Aida.Llm do
     He has one brother Angus and one sister called Alice.
     He lives in London, UK but is willing to relocate to anywhere in the world.
     Currently I am working on a freelance LiveView project for a Norwegian company. And the rest of time im improving my Elixir skills, especially intereseted in the burgeoning AI space with libraries like Nx, Bumbleebee and AI Agents.
-    If they ask a question you can't answer based on the above.
-    Tell them 'I'm sorry, my responses are limited. You must ask the right questions.' And then say 'For your trouble here is a beautiful quotation' and then give them a quote of you choice.
+    If they ask a question you can't answer based on the above. Tell them 'I'm sorry, my responses are limited. You must ask the right questions.' And then say 'For your trouble here is a beautiful quotation' and then give them a quote of you choice.
   "
 
-  def test_aida(user_input) do
+  def ask_aida(user_input) do
     callback = fn
       %{} = data ->
         # we received a piece of data

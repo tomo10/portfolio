@@ -54,8 +54,9 @@ defmodule PortfolioWeb.CustomComponents do
 
   attr :image_src, :string, required: true
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
-  slot :form
-  slot :response
+  attr :response, :string
+  attr :loading, :boolean
+  attr :form, :map
 
   def aida(assigns) do
     ~H"""
@@ -78,10 +79,9 @@ defmodule PortfolioWeb.CustomComponents do
             help_text="e.g. What technology do you like using?"
           />
         </.form>
-        <%!-- <div class="flex justify-start">
-          <.button color="secondary" phx-disable-with="Loading...">Ask me</.button>
-        </div> --%>
-
+        <div class="flex justify-center">
+          <.spinner show={@loading} size="lg" class="text-secondary-500 mt-20" />
+        </div>
         <div :if={@response} class="mt-20">
           <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
             <%= @response %>

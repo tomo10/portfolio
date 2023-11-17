@@ -12,7 +12,8 @@ defmodule PortfolioWeb.LandingPageLive do
         socket,
         page_title: "Ask Jeeves",
         form: to_form(form_params),
-        response: ""
+        response: "",
+        loading: false
       )
 
     {:ok, socket}
@@ -20,9 +21,15 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def handle_event("submit", %{"question" => question}, socket) do
-    # response = Aida.Llm.test_aida(question)
-    response = "I'm sorry, my responses are limited. You must ask the right questions."
-    JS.show()
-    {:noreply, assign(socket, response: response)}
+    send(self(), {:ask_aida, question})
+
+    {:noreply, assign(socket, loading: true)}
+  end
+
+  @impl true
+  def handle_info({:ask_aida, question}, socket) do
+    response = Aida.Llm.ask_aida(question)
+    # response = "I'm sorry, my responses are limited. You must ask the right questions."
+    {:noreply, assign(socket, response: response.content, loading: false)}
   end
 end
