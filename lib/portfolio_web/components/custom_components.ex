@@ -48,7 +48,7 @@ defmodule PortfolioWeb.CustomComponents do
 
   def aida(assigns) do
     ~H"""
-    <section class="flex-1 from-white to-gray-100 py-12 dark:from-gray-900 dark:to-gray-800">
+    <section class="lg:flex-1 items-center justify-center text-center lg:text-left py-12 dark:from-gray-900 dark:to-gray-800">
       <div class="lg:h-128">
         <div class="flex items-center justify-center lg:h-128">
           <img

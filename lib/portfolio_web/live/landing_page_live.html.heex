@@ -1,7 +1,7 @@
 <%!-- This should match max_width in `public.html.heex`. Options: ["sm", "md", "lg", "xl", "full"] --%>
 <% max_width = "xl" %>
 
-<.container max_width={max_width} class="relative flex flex-row py-20">
+<.container max_width={max_width} class="relative flex flex-col lg:flex-row py-20">
   <CC.hero
     image_src={~p"/images/landing_page/moi.jpeg"}
     logo_cloud_title={gettext("Trusted by brands all over the world*")}
