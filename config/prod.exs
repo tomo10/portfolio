@@ -12,6 +12,7 @@ import Config
 config :portfolio,
        PortfolioWeb.Endpoint,
        url: [host: "https://tedwards.dev"],
+       check_origin: ["https://tedwards.dev", "https://dark-snow-1832.fly.dev/"],
        cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Configures Swoosh API Client
