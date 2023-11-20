@@ -219,7 +219,7 @@ defmodule PortfolioWeb.CustomComponents do
           </div>
 
           <%!-- <div class="solo-animation fade-in-animation flickity"> --%>
-          <div class="flex flex-row">
+          <div class=" flex flex-col items-center lg:flex-row lg:justify-center">
             <%= for social <- @socials do %>
               <.contact_panel {social} />
             <% end %>
@@ -290,7 +290,7 @@ defmodule PortfolioWeb.CustomComponents do
 
   def contact_panel(assigns) do
     ~H"""
-    <div class="p-4 mr-10 overflow-hidden text-gray-700 transition duration-500 ease-in-out rounded-lg shadow-lg md:p-8 md:w-8/12 lg:w-5/12 bg-primary-50 dark:bg-gray-700 dark:text-white carousel-cell last:mr-0">
+    <div class="p-4 my-4 mr-10 text-gray-700 rounded-lg shadow-lgn md:p-8 sm:w-10/12 md:w-8/12 lg:w-5/12 bg-primary-50 dark:bg-gray-700 dark:text-white">
       <div class="flex items-center">
         <div class="inline-flex flex-shrink-0 border-2 border-white rounded-full">
           <img class="w-16 h-16 rounded-full" src={@image_src} alt="" />

@@ -40,7 +40,7 @@ config :portfolio,
 
 # Configures the endpoint
 config :portfolio, PortfolioWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "https://tedwards.dev"],
   render_errors: [
     formats: [html: PortfolioWeb.ErrorHTML, json: PortfolioWeb.ErrorJSON],
     layout: false
