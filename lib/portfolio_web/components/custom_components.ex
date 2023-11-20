@@ -17,21 +17,21 @@ defmodule PortfolioWeb.CustomComponents do
       <div class="w-full px-8">
         <div class="py-12">
           <div class="max-w-lg mx-auto mb-8 text-center lg:max-w-md lg:mx-0 lg:text-left">
-            <.h1 class="fade-in-animation">
+            <.h1>
               <%= render_slot(@title) %>
             </.h1>
 
-            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400">
               <%= render_slot(@description) %>
             </p>
-            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400">
               <%= render_slot(@about_me_1) %>
             </p>
-            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400 fade-in-animation">
+            <p class="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400">
               <%= render_slot(@about_me_2) %>
             </p>
           </div>
-          <div class="space-x-2 text-center lg:text-left fade-in-animation">
+          <div class="space-x-2 text-center lg:text-left">
             <%= render_slot(@action_buttons) %>
           </div>
         </div>
@@ -51,12 +51,7 @@ defmodule PortfolioWeb.CustomComponents do
     <section class="lg:flex-1 items-center justify-center text-center lg:text-left py-12 dark:from-gray-900 dark:to-gray-800">
       <div class="lg:h-128">
         <div class="flex items-center justify-center lg:h-128">
-          <img
-            id="hero-image"
-            class="fade-in-from-right-animation rounded-full lg:max-w-lg max-h-[100px]"
-            src={@image_src}
-            alt=""
-          />
+          <img id="hero-image" class="rounded-full lg:max-w-lg max-h-[100px]" src={@image_src} alt="" />
         </div>
 
         <.form for={@form} phx-submit="submit" class="my-10">
@@ -65,12 +60,12 @@ defmodule PortfolioWeb.CustomComponents do
             placeholder="Ask me anything..."
             help_text="e.g. What are you working on at the moment ? What are your hobbies ? Are aliens real ?"
           />
+          <.button color="primary" label="Ask me" size="lg" variant="inverted" />
         </.form>
-        <.button color="primary" label="Ask me" variant="inverted" />
         <div class="flex justify-center">
           <.spinner show={@loading} size="lg" class="text-primary-500 mt-20" />
         </div>
-        <div :if={@response} class="mt-20">
+        <div :if={@response} class="mt-10">
           <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
             <%= @response %>
           </div>

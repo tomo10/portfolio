@@ -28,7 +28,7 @@ defmodule PortfolioWeb.LandingPageLive do
   @impl true
   def handle_info({:ask_aida, question}, socket) do
     response = Aida.Llm.ask_aida(question)
-    # response = "I'm sorry, my responses are limited. You must ask the right questions."
+
     {:noreply, assign(socket, response: response.content, loading: false)}
   end
 end
