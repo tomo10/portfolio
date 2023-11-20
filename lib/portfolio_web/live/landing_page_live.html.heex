@@ -8,11 +8,10 @@
     max_width="lg"
   >
     <:title>
-      <span><%= gettext("Thomas Edwards") %></span>
+      <span><%= gettext("Thomas Edwards ->") %></span>
       <span class="text-primary-600">
         <%= gettext("Full Stack Engineer") %>
       </span>
-      <%!-- <span><%= gettext("Edwards") %></span> --%>
     </:title>
     <:action_buttons>
       <.button
@@ -21,6 +20,7 @@
         color="primary"
         to="mailto:thce28@gmail.com"
         size="lg"
+        variant="inverted"
       />
     </:action_buttons>
     <:description>

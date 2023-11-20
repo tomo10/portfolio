@@ -59,13 +59,14 @@ defmodule PortfolioWeb.CustomComponents do
           />
         </div>
 
-        <.form for={@form} phx-submit="submit">
+        <.form for={@form} phx-submit="submit" class="my-10">
           <.field
             field={@form[:question]}
             placeholder="Ask me anything..."
             help_text="e.g. What are you working on at the moment ? What are your hobbies ? Are aliens real ?"
           />
         </.form>
+        <.button color="primary" label="Ask me" variant="inverted" />
         <div class="flex justify-center">
           <.spinner show={@loading} size="lg" class="text-primary-500 mt-20" />
         </div>
@@ -210,22 +211,20 @@ defmodule PortfolioWeb.CustomComponents do
       id="contact"
       class="relative z-10 transition duration-500 ease-in-out bg-white py-36 dark:bg-gray-900"
     >
-      <div class="overflow-hidden content-wrapper">
-        <.container max_width={@max_width} class="relative z-10">
-          <div class="mb-5 text-center md:mb-12 section-header stagger-fade-in-animation">
-            <div class="mb-3 text-3xl font-bold leading-none dark:text-white md:mb-5 fade-in-animation md:text-5xl">
-              <%= @title %>
-            </div>
+      <.container max_width={@max_width} class="relative z-10">
+        <div class="mb-5 text-center md:mb-12 section-header stagger-fade-in-animation">
+          <div class="mb-3 text-3xl font-bold leading-none dark:text-white md:mb-5 fade-in-animation md:text-5xl">
+            <%= @title %>
           </div>
+        </div>
 
-          <%!-- <div class="solo-animation fade-in-animation flickity"> --%>
-          <div class=" flex flex-col items-center lg:flex-row lg:justify-center">
-            <%= for social <- @socials do %>
-              <.contact_panel {social} />
-            <% end %>
-          </div>
-        </.container>
-      </div>
+        <%!-- <div class=" flex flex-col items-center lg:flex-row lg:justify-center"> --%>
+        <div class="flex flex-col lg:flex-row justify-center">
+          <%= for social <- @socials do %>
+            <.contact_panel {social} />
+          <% end %>
+        </div>
+      </.container>
     </section>
 
     <script phx-update="ignore" id="testimonials-js" type="module">
@@ -290,7 +289,7 @@ defmodule PortfolioWeb.CustomComponents do
 
   def contact_panel(assigns) do
     ~H"""
-    <div class="p-4 my-4 mr-10 text-gray-700 rounded-lg shadow-lgn md:p-8 sm:w-10/12 md:w-8/12 lg:w-5/12 bg-primary-50 dark:bg-gray-700 dark:text-white">
+    <div class="lg:w-1/3 p-4 my-4 mx-10 text-gray-700 rounded-lg shadow-lgn bg-primary-50 dark:bg-gray-700 dark:text-white">
       <div class="flex items-center">
         <div class="inline-flex flex-shrink-0 border-2 border-white rounded-full">
           <img class="w-16 h-16 rounded-full" src={@image_src} alt="" />
