@@ -11,7 +11,7 @@ import Config
 # before starting your production server.
 config :portfolio,
        PortfolioWeb.Endpoint,
-       url: [host: "tedwards.dev"],
+       url: [host: "https://tedwards.dev"],
        cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Configures Swoosh API Client
