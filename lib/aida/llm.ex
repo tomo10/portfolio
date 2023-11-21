@@ -42,20 +42,11 @@ defmodule Aida.Llm do
     CFA Institute, CFA level II - (90th percentile globally Jun 2016 - Jun 2018
   "
 
-  def subscribe do
-    Phoenix.PubSub.subscribe(Portfolio.PubSub, "stream_response")
-  end
-
-  def broadcast(message) do
-    Phoenix.PubSub.broadcast(Portfolio.PubSub, "stream_response", message)
-  end
-
   def ask_aida(user_input) do
     callback = fn
       %MessageDelta{} = data ->
-        # we received a piece of data
-        broadcast({:stream_response, data.content})
-        IO.write(data.content)
+        # we received a chunk of data
+        Aida.Stream.broadcast({:stream_response, data.content})
 
       %Message{} = data ->
         # we received the finshed message once fully complete

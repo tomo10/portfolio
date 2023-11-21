@@ -4,35 +4,19 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    if connected?(socket), do: Aida.Llm.subscribe()
+    if connected?(socket), do: Aida.Stream.subscribe()
 
-    form_params = %{"question" => ""}
-
-    socket =
-      assign(
-        socket,
-        form: to_form(form_params),
-        response: nil
-      )
-
-    {:ok, socket}
-  end
-
-  @impl true
-  def handle_event("submit", %{"question" => question}, socket) do
-    # send(self(), {:ask_aida, question})
-    Aida.Llm.subscribe()
-
-    Aida.Llm.ask_aida(question)
-
-    {:noreply, assign(socket, response: nil)}
+    {:ok, assign(socket, :response, "")}
   end
 
   @impl true
   def handle_info({:stream_response, content}, socket) do
-    # IO.puts("")
-    IO.inspect(content, label: "STREAM RESPONSE CONTENT")
-    socket = stream_insert(socket, :response, content)
+    IO.inspect(content, label: "----------- STREAM RESPONSE INCOMING ---------")
+    current_response = socket.assigns.response
+
+    new_response = if content == nil, do: current_response, else: current_response <> content
+
+    socket = assign(socket, :response, new_response)
 
     {:noreply, socket}
   end
