@@ -43,7 +43,7 @@ defmodule PortfolioWeb.CustomComponents do
   attr :image_src, :string, required: true
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
   attr :response, :string
-  attr :loading, :boolean
+  # attr :loading, :boolean
   attr :form, :map
 
   def aida(assigns) do
@@ -62,11 +62,16 @@ defmodule PortfolioWeb.CustomComponents do
           />
           <.button color="primary" label="Ask me" size="lg" variant="inverted" />
         </.form>
-        <div class="flex justify-center">
+        <%!-- <div class="flex justify-center">
           <.spinner show={@loading} size="lg" class="text-primary-500 mt-20" />
-        </div>
+        </div> --%>
         <div :if={@response} class="mt-10">
-          <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
+          <div
+            id="response_id"
+            phx-update="stream"
+            phx-value={@response}
+            class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold"
+          >
             <%= @response %>
           </div>
         </div>
