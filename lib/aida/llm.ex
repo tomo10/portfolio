@@ -2,6 +2,7 @@ defmodule Aida.Llm do
   alias LangChain.Chains.LLMChain
   alias LangChain.ChatModels.ChatOpenAI
   alias LangChain.Message
+  alias LangChain.MessageDelta
 
   @tomo_info "
     You are answering on behalf of Thomas Edwards 34 years old - but answer all questions in the first person as if you ARE him. He is looking for a software engineering job using Elixir.
@@ -30,7 +31,7 @@ defmodule Aida.Llm do
     Reviewed code of other developers and participated in overall design decisions and reviews helping estimate project scope and functionality
     Built REST endpoints and client side queries for mobile application. Worked with remote teams across different time zones
     Role: Full Stack Engineer, Tiso App Jul 2019 - May 2022 London
-    Muilt social platorm centred around events using React Native, RealmDM (for offline functionality), GrapphQL, and Node.js with MongoDB database
+    Muilt social platorm centred around events using React Native, RealmDM (for offline functionality), GraphQL, and Node.js with MongoDB database
     Used containerised backend using Docker and Kubernetes as well as establishing a CI/CD pipeline with Fastlane and Github actions
     Migrated the websocket mechanism for instant messaging from Node.js to Elixir by utilising Phoenix channels
     Role: Reinsurance Broker, Price Forbes & Partners Dec 2011 - Feb 2018 City of London
@@ -41,22 +42,31 @@ defmodule Aida.Llm do
     CFA Institute, CFA level II - (90th percentile globally Jun 2016 - Jun 2018)
   "
 
+  def subscribe do
+  end
+
   def ask_aida(user_input) do
     callback = fn
-      %{} = data ->
+      %MessageDelta{} = data ->
         # we received a piece of data
+        broadcast({:stream_response, data.content})
         IO.write(data.content)
+
+      %Message{} = data ->
+        # we received the finshed message once fully complete
+        IO.puts("")
+        IO.inspect(data.content, label: "COMPLETED MESSAGE")
     end
 
     {:ok, _updated_chain, response} =
-      %{llm: ChatOpenAI.new!(%{model: "gpt-3.5-turbo"})}
+      %{llm: ChatOpenAI.new!(%{model: "gpt-3.5-turbo", stream: true})}
       |> LLMChain.new!()
       |> LLMChain.add_messages([
         Message.new_system!(@tomo_info),
         Message.new_system!(@tomo_cv),
         Message.new_user!(user_input)
       ])
-      |> LLMChain.run(custom_fn: callback)
+      |> LLMChain.run(callback_fn: callback)
 
     response
   end

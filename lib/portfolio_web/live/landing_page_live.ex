@@ -1,18 +1,18 @@
 defmodule PortfolioWeb.LandingPageLive do
   use PortfolioWeb, :live_view
-  # alias Phoenix.LiveView.JS
   alias PortfolioWeb.CustomComponents, as: CC
 
   @impl true
   def mount(_params, _session, socket) do
+    if connected?(socket), do: Aida.Llm.subscribe()
+
     form_params = %{"question" => ""}
 
     socket =
       assign(
         socket,
         form: to_form(form_params),
-        response: nil,
-        loading: false
+        response: nil
       )
 
     {:ok, socket}
@@ -20,15 +20,20 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def handle_event("submit", %{"question" => question}, socket) do
-    send(self(), {:ask_aida, question})
+    # send(self(), {:ask_aida, question})
+    Aida.Llm.subscribe()
 
-    {:noreply, assign(socket, loading: true, response: nil)}
+    Aida.Llm.ask_aida(question)
+
+    {:noreply, assign(socket, response: nil)}
   end
 
   @impl true
-  def handle_info({:ask_aida, question}, socket) do
-    response = Aida.Llm.ask_aida(question)
+  def handle_info({:stream_response, content}, socket) do
+    # IO.puts("")
+    IO.inspect(content, label: "STREAM RESPONSE CONTENT")
+    socket = stream_insert(socket, :response, content)
 
-    {:noreply, assign(socket, response: response.content, loading: false)}
+    {:noreply, socket}
   end
 end
