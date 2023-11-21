@@ -11,13 +11,12 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def handle_info({:stream_response, content}, socket) do
-    IO.inspect(content, label: "----------- STREAM RESPONSE INCOMING ---------")
+    # this function is only being called AFTER the stream of responses has finished. Undesirable behaviour atm.
     current_response = socket.assigns.response
 
-    new_response = if content == nil, do: current_response, else: current_response <> content
+    # deals with the first and last message deltas being nil
+    updated_response = if content == nil, do: current_response, else: current_response <> content
 
-    socket = assign(socket, :response, new_response)
-
-    {:noreply, socket}
+    {:noreply, assign(socket, :response, updated_response)}
   end
 end
