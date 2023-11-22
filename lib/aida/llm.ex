@@ -22,13 +22,13 @@ defmodule Aida.Llm do
     Profile
     Passionate software engineer looking or a full stack or backend role using Elixir. Experience in startup and corporate environments as well as previous work in the London insurance market, where I started programming. Here I learned Python and the Cuantitative and analytical skills that trans erred well into the so tware engineering industry
     Employment History
-    Role: Elixir Full Stack Engineer, THCE Technologies Limited Feb 2023 - Present
-    Various freelance projects using the PETAL stack. Currently working on an online booking system and web application for a Norwegian skiing company
-    Built a highly perormant webscraper for an Australian fnancial services client using sentiment analysis and named entity recognition
+    Role: Elixir Full Stack Engineer, Independent, Feb 2023 - Present
+    Various freelance projects using the PETAL stack. Currently working on a greenfield webs application for an events company using Phoenix LiveView and Elixir - its in beta.
+    Built a highly performant webscraper for an Australian fnancial services client using sentiment analysis and named entity recognition. This resulted in a 50% improvement in their latency metrics.
     Role: Senior Javascript Developer 3ontract, MMT Digital June 2022 - Jan 2023
     Developed a portolio management mobile application for a global wealth management firm on a contractual basis
     Reviewed code of other developers and participated in overall design decisions and reviews helping estimate project scope and functionality
-    MuiltRESTendpointsandclientsideCueries ormobileapplication.Workedwithremote teamsacrossdi erenttime-9onesq
+    Built REST endpoints and client side queries for mobile application. Worked with remote teams across different time-zones
     Role: Full Stack Engineer, Tiso App Jul 2019 - May 2022 London
     Muilt social platorm centred around events using React Native, RealmDM (for offline functionality), GrapphQL, and Node.js with MongoDB database
     Used containerised backend using Docker and Kubernetes as well as establishing a CI/CD pipeline with Fastlane and Github actions
