@@ -11,12 +11,6 @@ config :portfolio, PortfolioWeb.Endpoint,
   secret_key_base: "cPNzM6yNbuYM9FcYYtqL/PPFpiGQD5Tdxe4pRe8KYGFJ8gwI3Zgl6VL80H6pFeOp",
   server: true
 
-# In test we don't send emails.
-config :portfolio, Portfolio.Mailer, adapter: Swoosh.Adapters.Test
-
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
-
 # Print only warnings and errors during test
 config :logger, level: :warning
 

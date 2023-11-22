@@ -50,10 +50,8 @@ defmodule Portfolio.MixProject do
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19"},
-      {:floki, ">= 0.34.3"},
       {:phoenix_live_dashboard, "~> 0.8"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.11"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
@@ -61,11 +59,6 @@ defmodule Portfolio.MixProject do
       {:plug_cowboy, "~> 2.5"},
       # https://github.com/deadtrickster/ssl_verify_fun.erl/pull/27
       {:ssl_verify_fun, ">= 0.0.0", manager: :rebar3, override: true},
-
-      # Emails
-      {:phoenix_swoosh, "~> 1.0"},
-      {:gen_smtp, "~> 1.2"},
-      {:premailex, "~> 0.3.0"},
 
       # Hashing
       {:hashids, "~> 2.0"},

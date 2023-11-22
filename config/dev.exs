@@ -66,9 +66,6 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
-
 # Used in Util.email_valid?
 # In dev mode we don't bother with MX record check - just the string format.
 # In prod.ex MX checking is enabled

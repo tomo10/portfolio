@@ -94,10 +94,4 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
-
-  config :portfolio, Portfolio.Mailer,
-    adapter: Swoosh.Adapters.AmazonSES,
-    region: System.get_env("AWS_REGION"),
-    access_key: System.get_env("AWS_ACCESS_KEY"),
-    secret: System.get_env("AWS_SECRET")
 end
