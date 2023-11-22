@@ -30,6 +30,21 @@ config :portfolio, :s3,
   bucket: System.get_env("S3_FILE_UPLOAD_BUCKET")
 
 if config_env() == :prod do
+  openai_key =
+    System.get_env("OPENAI_KEY") ||
+      raise """
+      Environment variable OPENAI_KEY is missing.
+      """
+
+  openai_org_id =
+    System.get_env("OPENAI_ORG_ID") ||
+      raise """
+      Environment variable OPENAI_ORG_ID is missing.
+      """
+
+  config :langchain, openai_key: openai_key
+  config :langchain, openai_org_id: openai_org_id
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """

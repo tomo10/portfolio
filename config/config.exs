@@ -91,6 +91,8 @@ config :tailwind,
   ]
 
 # To configure our openai api keys
+openai_key = System.get_env("OPENAI_KEY")
+openai_org_id = System.get_env("OPENAI_ORG_ID")
 config :langchain, openai_key: System.get_env("OPENAI_KEY")
 config :langchain, openai_org_id: System.get_env("OPENAI_ORG_ID")
 # config :langchain, openai_key: System.get_env("OPENAI_KEY")
