@@ -9,7 +9,7 @@
       </.h2>
       <img
         id="ad-astra-image"
-        class="rounded-lg lg:max-w-lg max-h-lg"
+        class="rounded-lg lg:max-w-lg max-h-60"
         src={~p"/images/ad_astra/jw_deep_field.jpeg"}
         alt=""
       />
@@ -63,21 +63,23 @@
   <% end %>
 
   <div class="px-4 py-8 sm:px-0">
-    <.form for={@form} phx-submit="save" class="pb-8">
+    <.form for={@form} phx-submit="save-star" class="pb-8">
       <.field
         required
-        field={@form[:star_name_1]}
+        field={@form[:star_name]}
         placeholder="Name"
         phx-debounce="blur"
-        label="Star 1"
+        label="Star name"
       />
-      <.field
-        required
-        field={@form[:star_name_2]}
-        placeholder="Name"
-        phx-debounce="blur"
-        label="Star 2"
-      />
+    </.form>
+    <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24">
+      <div class="flex flex-row">
+        <%= for star <- @stars do %>
+          <.star star={star} />
+        <% end %>
+      </div>
+    </div>
+    <.form for={@form} phx-submit="calculate" class="pb-8">
       <.field
         field={@form[:speed]}
         type="radio-group"
@@ -88,14 +90,10 @@
           {"Jumbo Jet - 600 mph", "4"}
         ]}
       />
-      <.button>Calculate</.button>
+      <.button variant="inverted">Calculate</.button>
     </.form>
   </div>
-  <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-96">
-    <div :if={@star_2.name != nil} class="flex flex-row">
-      <.star star={@star_1} />
-      <.star star={@star_2} />
-    </div>
+  <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24">
     <div :if={@result} class="flex flex-col items-center">
       <.h4>
         It would take this long to travel between these stars going at the speed of <%= @speed %>
