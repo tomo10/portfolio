@@ -49,8 +49,8 @@ defmodule Portfolio.MixProject do
       {:phoenix, "~> 1.7.3"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.19"},
-      {:phoenix_live_dashboard, "~> 0.8"},
+      {:phoenix_live_view, "~> 0.20.1"},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
@@ -67,8 +67,8 @@ defmodule Portfolio.MixProject do
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
 
       # Petal components and framework
-      {:petal_components, "~> 1.2.6"},
-      {:petal_framework, "~> 0.4.3", repo: "petal"},
+      {:petal_components, "~> 1.7.1"},
+      {:petal_framework, "~> 0.5", repo: "petal"},
 
       # Utils
       {:blankable, "~> 1.0.0"},
