@@ -73,10 +73,13 @@
       />
     </.form>
     <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24">
-      <div class="flex flex-row">
+      <div :if={!@async_result.loading} class="flex flex-row">
         <%= for star <- @stars do %>
           <.star star={star} />
         <% end %>
+      </div>
+      <div :if={@async_result.failed}>
+        <.h2><%= @async_result.failed %></.h2>
       </div>
     </div>
     <.form for={@form} phx-submit="calculate" class="pb-8">

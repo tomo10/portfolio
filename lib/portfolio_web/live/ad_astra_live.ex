@@ -7,13 +7,13 @@ defmodule PortfolioWeb.AdAstraLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    # form_params = %{"star_name_1" => "", "star_name_2" => "", "speed" => ""}
     form_params = %{"star_name" => "", "speed" => ""}
 
     socket =
       assign(
         socket,
         result: nil,
+        async_result: %AsyncResult{},
         speed: "",
         star: %Star{},
         stars: [],
@@ -30,7 +30,7 @@ defmodule PortfolioWeb.AdAstraLive do
 
   def star(assigns) do
     ~H"""
-    <div :if={@star.name != nil} class="p-8">
+    <div class="p-8">
       <.h4><%= @star.name %></.h4>
       <p>Right ascension: <%= @star.right_ascension %></p>
       <p>Declination: <%= @star.declination %></p>
@@ -39,26 +39,12 @@ defmodule PortfolioWeb.AdAstraLive do
     """
   end
 
-  # @impl true
-  # def handle_event("save", params, socket) do
-  #   case Api.fetch_stars(params["star_name_1"], params["star_name_2"]) do
-  #     {:ok, stars} ->
-  #       [star1, star2] = stars
-  #       result = calculate_journey_time(star1, star2, params["speed"])
-  #       speed = Trigonometry.map_speed(params["speed"])
-  #       {:noreply, assign(socket, star_1: star1, star_2: star2, speed: speed, result: result)}
-
-  #     {:error, msg} ->
-  #       {:noreply, put_flash(socket, :error, msg)}
-  #   end
-  # end
-
   @impl true
   def handle_event("save-star", params, socket) do
-    {:noreply,
-     start_async(socket, :star, fn ->
-       Api.fetch_star(params["star_name"])
-     end)}
+    socket =
+      start_star_task(socket, params)
+
+    {:noreply, socket}
   end
 
   @impl true
@@ -76,15 +62,31 @@ defmodule PortfolioWeb.AdAstraLive do
     {:noreply, assign(socket, speed: speed, result: result)}
   end
 
-  def handle_async(:star, {:ok, fetched_star}, socket) do
-    stars = [fetched_star | socket.assigns.stars]
-
-    {:noreply, assign(socket, :stars, stars)}
+  def start_star_task(socket, params) do
+    socket
+    |> assign(:async_result, AsyncResult.loading())
+    |> start_async(:async_task, fn ->
+      Api.fetch_star(params["star_name"])
+    end)
   end
 
-  def handle_async(:star, {:exit, reason}, socket) do
-    %{star: star} = socket.assigns
-    {:noreply, assign(socket, :star, AsyncResult.failed(star, {:exit, reason}))}
+  def handle_async(:async_task, {:ok, {:ok, [], failed_star}}, socket) do
+    socket =
+      assign(
+        socket,
+        :async_result,
+        AsyncResult.failed(%AsyncResult{}, "#{failed_star} not found")
+      )
+
+    {:noreply, socket}
+  end
+
+  def handle_async(:async_task, {:ok, {:ok, fetched_star}}, socket) do
+    stars = [fetched_star | socket.assigns.stars]
+
+    socket = assign(socket, :async_result, AsyncResult.ok(%AsyncResult{}, :ok))
+
+    {:noreply, assign(socket, :stars, stars)}
   end
 
   def calculate_journey_time(star_1, star_2, speed) do

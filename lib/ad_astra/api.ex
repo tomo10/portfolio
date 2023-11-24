@@ -1,41 +1,21 @@
 defmodule AdAstra.Api do
   use HTTPoison.Base
-  # alias AdAstra.Stars
-
   @api_key [{"X-Api-Key", "IZUmKgtnaQNAGgJdGrdQ3w==fYQue8KWKENTnuh9"}]
 
   @doc """
-  Fetches the star data from the API and returns it as a list of 2 stars [star1, star2]
+  Fetches the star data from the API and returns it as a {:ok, star} tuple if successful
   """
-
-  # def fetch_stars(star_1, star_2) do
-  #   Stars.start_link([])
-
-  #   # stars are fetch sequentially, could be improved
-  #   fetch_star(star_1, :star_1)
-  #   fetch_star(star_2, :star_2)
-
-  #   {:ok, Stars.stars()}
-  # end
-
-  # def fetch_star(star, atom) do
-  #   case fetch(star) do
-  #     {:ok, body} ->
-  #       values = extract_values_from_star(body)
-  #       Stars.put(atom, values)
-
-  #     {:error, msg} ->
-  #       IO.puts("Network error with the api #{msg}")
-  #   end
-  # end
-
   def fetch_star(star) do
     case fetch(star) do
-      {:ok, body} ->
-        extract_values_from_star(body)
+      {:ok, []} ->
+        {:ok, [], star}
 
+      {:ok, body} ->
+        {:ok, extract_values_from_star(body)}
+
+      # this error path only deals with network errors
       {:error, msg} ->
-        IO.puts("Network error with the api #{msg}")
+        {:error, "Network error with the api #{msg}"}
     end
   end
 
