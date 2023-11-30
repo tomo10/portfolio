@@ -13,24 +13,24 @@
         src={~p"/images/ad_astra/jw_deep_field.jpeg"}
         alt=""
       />
+      <div class="pt-4">
+        <.a
+          type="live_patch"
+          class="inline-block hover:bg-primary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-primary-700"
+          to="ad-astra/modal"
+          label="How it works?"
+        />
+      </div>
     </div>
     <.h5>
-      Built this project because I'm constantly boring people about how vast space is
+      Built this project because I'm constantly boring people about how vast space is.
     </.h5>
     <.h5>
-      Enter the names of any 2 stars you can see in the night sky, then select the speed at which you'd like to travel between them...
+      Enter the names of any 2 stars you can see in the night sky, then select the speed at which you'd like to travel between them.
     </.h5>
     <.h5>
       Some examples: Vega, Sirius, Betelgeuse, Solaris, Rigel, Capella
     </.h5>
-  </div>
-  <div class="pt-4">
-    <.a
-      type="live_patch"
-      class="inline-block bg-secondary-500 hover:bg-secondary-600 text-sm text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-secondary-700"
-      to="ad-astra/modal"
-      label="How it works"
-    />
   </div>
 
   <%= if @live_action == :modal do %>
@@ -72,17 +72,20 @@
         label="Star name"
       />
     </.form>
-    <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24">
-      <div :if={!@async_result.loading} class="flex flex-row">
+    <div :if={@async_result.failed}>
+      <.h5><%= @async_result.failed %></.h5>
+    </div>
+    <div
+      :if={length(@stars) > 0}
+      class="flex flex-col pb-4 items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24"
+    >
+      <div class="flex flex-row">
         <%= for star <- @stars do %>
           <.star star={star} />
         <% end %>
       </div>
-      <div :if={@async_result.failed}>
-        <.h2><%= @async_result.failed %></.h2>
-      </div>
     </div>
-    <.form for={@form} phx-submit="calculate" class="pb-8">
+    <.form for={@form} phx-submit="calculate" class="py-8">
       <.field
         field={@form[:speed]}
         type="radio-group"
@@ -96,14 +99,12 @@
       <.button variant="inverted">Calculate</.button>
     </.form>
   </div>
-  <div class="flex flex-col items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24">
-    <div :if={@result} class="flex flex-col items-center">
-      <.h4>
-        It would take this long to travel between these stars going at the speed of <%= @speed %>
-      </.h4>
-      <.h2>
-        <%= @result %> years
-      </.h2>
-    </div>
+  <div :if={@result} class="flex flex-col items-center">
+    <.h4>
+      It would take this long to travel between these stars going at the speed of <%= @speed %>
+    </.h4>
+    <.h2>
+      <%= @result %> years
+    </.h2>
   </div>
 </.container>

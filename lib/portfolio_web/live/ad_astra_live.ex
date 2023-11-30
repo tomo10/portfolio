@@ -82,7 +82,10 @@ defmodule PortfolioWeb.AdAstraLive do
   end
 
   def handle_async(:async_task, {:ok, {:ok, fetched_star}}, socket) do
-    stars = [fetched_star | socket.assigns.stars]
+    stars =
+      if length(socket.assigns.stars) == 2,
+        do: socket.assigns.stars,
+        else: [fetched_star | socket.assigns.stars]
 
     socket = assign(socket, :async_result, AsyncResult.ok(%AsyncResult{}, :ok))
 
