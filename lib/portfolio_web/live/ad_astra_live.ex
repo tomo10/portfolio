@@ -30,7 +30,12 @@ defmodule PortfolioWeb.AdAstraLive do
 
   def star(assigns) do
     ~H"""
-    <div class="p-8">
+    <div
+      phx-click="remove-star"
+      phx-value-star-id={@star.name}
+      style="cursor: pointer"
+      class="p-8 mr-4 border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800"
+    >
       <.h4><%= @star.name %></.h4>
       <p>Right ascension: <%= @star.right_ascension %></p>
       <p>Declination: <%= @star.declination %></p>
@@ -48,6 +53,15 @@ defmodule PortfolioWeb.AdAstraLive do
   end
 
   @impl true
+  def handle_event("remove-star", %{"star-id" => star_id}, socket) do
+    stars = Enum.reject(socket.assigns.stars, fn star -> star.name == star_id end)
+
+    socket = assign(socket, :stars, stars)
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("close_modal", _, socket) do
     # Go back to the :index live action
     {:noreply, push_patch(socket, to: "/ad-astra")}
@@ -56,6 +70,7 @@ defmodule PortfolioWeb.AdAstraLive do
   @impl true
   def handle_event("calculate", %{"speed" => speed}, socket) do
     [star1, star2] = socket.assigns.stars
+
     result = calculate_journey_time(star1, star2, speed)
     speed = Trigonometry.map_speed(speed)
 

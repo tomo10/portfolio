@@ -75,10 +75,7 @@
     <div :if={@async_result.failed}>
       <.h5><%= @async_result.failed %></.h5>
     </div>
-    <div
-      :if={length(@stars) > 0}
-      class="flex flex-col pb-4 items-center border-4 border-gray-300 border-dashed rounded-lg dark:border-gray-800 h-min-24"
-    >
+    <div :if={length(@stars) > 0} class="flex flex-col pb-4 items-center h-min-24">
       <div class="flex flex-row">
         <%= for star <- @stars do %>
           <.star star={star} />
