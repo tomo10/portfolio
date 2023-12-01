@@ -39,12 +39,12 @@
       ) %>
     </:about_me_2>
   </CC.hero>
-  <.live_component id="aida-live" module={PortfolioWeb.AidaLive} />
-  <div :if={@response} class="mt-10">
-    <div class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold">
-      <%= @response %>
-    </div>
-  </div>
+  <CC.aida
+    image_src={~p"/images/landing_page/moi.jpeg"}
+    form={@form}
+    llm_chain={@llm_chain}
+    response={@response}
+  />
 </.container>
 
 <CC.projects

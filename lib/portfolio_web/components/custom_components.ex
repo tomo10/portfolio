@@ -40,10 +40,36 @@ defmodule PortfolioWeb.CustomComponents do
     """
   end
 
+  @doc """
+  Render the raw content as markdown. Returns HTML rendered text.
+  """
+  def render_markdown(nil), do: Phoenix.HTML.raw(nil)
+
+  def render_markdown(text) when is_binary(text) do
+    # NOTE: This allows explicit HTML to come through.
+    #   - Don't allow this with user input.
+    text |> Earmark.as_html!(escape: false) |> Phoenix.HTML.raw()
+  end
+
+  @doc """
+  Render a markdown containing web component.
+  """
+  attr :text, :string, required: true
+  attr :class, :string, default: nil
+  attr :rest, :global
+
+  def markdown(%{text: nil} = assigns), do: ~H""
+
+  def markdown(assigns) do
+    ~H"""
+    <div class={["prose dark:prose-invert", @class]} {@rest}><%= render_markdown(@text) %></div>
+    """
+  end
+
   attr :image_src, :string, required: true
   attr :max_width, :string, default: "lg", values: ["sm", "md", "lg", "xl", "full"]
+  attr :llm_chain, :map
   attr :response, :string
-  # attr :loading, :boolean
   attr :form, :map
 
   def aida(assigns) do
@@ -62,18 +88,26 @@ defmodule PortfolioWeb.CustomComponents do
           />
           <.button color="primary" label="Ask me" size="lg" variant="inverted" />
         </.form>
-        <%!-- <div class="flex justify-center">
-          <.spinner show={@loading} size="lg" class="text-primary-500 mt-20" />
-        </div> --%>
-        <div :if={@response} class="mt-10">
-          <div
-            id="response_id"
-            phx-update="stream"
-            phx-value={@response}
-            class="p-5 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold"
-          >
-            <%= @response %>
-          </div>
+        <%= if @llm_chain.delta do %>
+          <li id="row-delta" class="flex justify-between gap-x-6 px-4 py-5">
+            <div class="flex gap-x-4">
+              <div class="shrink-0 w-16">
+                <div class="text-center"></div>
+              </div>
+              <div class="min-w-0 flex-auto">
+                <.markdown :if={@llm_chain.delta.role == "assistant"} text={@llm_chain.delta.content} />
+                <span :if={@llm_chain.delta.role != "assistant"} class="whitespace-pre-wrap">
+                  <%= @llm_chain.delta.content %>
+                </span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+        <div
+          :if={@response}
+          class="p-5 mt-10 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold"
+        >
+          <%= @response %>
         </div>
       </div>
     </section>
