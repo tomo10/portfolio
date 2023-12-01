@@ -42,11 +42,11 @@ defmodule Aida.Llm do
     CFA Institute, CFA level II - (90th percentile globally Jun 2016 - Jun 2018)
   "
 
-  def ask_aida(user_input) do
+  def ask_aida(user_input, lv_pid) do
     callback = fn
-      %MessageDelta{} = data ->
+      %MessageDelta{} = delta ->
         # we received a chunk of data
-        Aida.Stream.broadcast({:stream_response, data.content})
+        send(lv_pid, {:delta_response, delta.content})
 
       %Message{} = data ->
         # we received the finshed message once fully complete
@@ -58,8 +58,7 @@ defmodule Aida.Llm do
       %{llm: ChatOpenAI.new!(%{model: "gpt-3.5-turbo", stream: true})}
       |> LLMChain.new!()
       |> LLMChain.add_messages([
-        Message.new_system!(@tomo_info),
-        Message.new_system!(@tomo_cv),
+        Message.new_system!(@tomo_info <> @tomo_cv),
         Message.new_user!(user_input)
       ])
       |> LLMChain.run(callback_fn: callback)

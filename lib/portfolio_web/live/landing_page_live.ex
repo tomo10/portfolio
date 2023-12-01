@@ -4,14 +4,12 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    if connected?(socket), do: Aida.Stream.subscribe()
-
-    {:ok, assign(socket, :response, "")}
+    {:ok, assign(socket, response: "", parent_pid: self())}
   end
 
   @impl true
-  def handle_info({:stream_response, content}, socket) do
-    # this function is only being called AFTER the stream of responses has finished. Undesirable behaviour atm.
+  def handle_info({:delta_response, content}, socket) do
+    # move the live compoent logic render back into landing page directly and remove the live component
     current_response = socket.assigns.response
 
     # deals with the first and last message deltas being nil

@@ -52,14 +52,10 @@ defmodule PortfolioWeb.AidaLive do
 
   @impl true
   def handle_event("submit", %{"question" => question}, socket) do
-    # send(self(), {:ask_aida, question})
+    parent_pid = socket.assigns.parent_pid
 
-    Aida.Llm.ask_aida(question)
+    Aida.Llm.ask_aida(question, parent_pid)
 
     {:noreply, socket}
   end
-
-  # defp save_response(socket, response) do
-  #   assign(socket, response: response)
-  # end
 end
