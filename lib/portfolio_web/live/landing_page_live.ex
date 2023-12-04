@@ -53,7 +53,7 @@ defmodule PortfolioWeb.LandingPageLive do
       socket
       |> assign(:async_result, %AsyncResult{})
       |> assign(:form, to_form(form_params))
-      |> assign(:response, "")
+      |> assign(:response, nil)
       |> assign_llm_chain("How old are you?")
 
     {:ok, socket}
@@ -96,8 +96,8 @@ defmodule PortfolioWeb.LandingPageLive do
       %MessageDelta{} = delta ->
         send(lv_pid, {:chat_response, delta})
 
-      %Message{} = data ->
-        IO.inspect(data.content, label: "COMPLETED MESSAGE")
+      %Message{} = _data ->
+        :ok
     end
 
     socket
@@ -115,7 +115,7 @@ defmodule PortfolioWeb.LandingPageLive do
 
   # handles async function returning a successful result
   def handle_async(:running_llm, {:ok, :ok = _success_result}, socket) do
-    # discard the result of the successful async function. The side-effects are what we want.
+    # discard the result of the successful async function. We only want the side effects
     socket =
       assign(socket, :async_result, AsyncResult.ok(%AsyncResult{}, :ok))
 

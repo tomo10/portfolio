@@ -88,26 +88,19 @@ defmodule PortfolioWeb.CustomComponents do
           />
           <.button color="primary" label="Ask me" size="lg" variant="inverted" />
         </.form>
-        <%= if @llm_chain.delta do %>
-          <li id="row-delta" class="flex justify-between gap-x-6 px-4 py-5">
-            <div class="flex gap-x-4">
-              <div class="shrink-0 w-16">
-                <div class="text-center"></div>
-              </div>
-              <div class="min-w-0 flex-auto">
-                <.markdown :if={@llm_chain.delta.role == "assistant"} text={@llm_chain.delta.content} />
-                <span :if={@llm_chain.delta.role != "assistant"} class="whitespace-pre-wrap">
-                  <%= @llm_chain.delta.content %>
-                </span>
-              </div>
-            </div>
-          </li>
-        <% end %>
+
         <div
-          :if={@response}
+          :if={@llm_chain.delta || @response}
           class="p-5 mt-10 text-white border-gray-200 rounded-lg bg-slate-800 text-semibold"
         >
-          <%= @response %>
+          <%= if @llm_chain.delta do %>
+            <.markdown :if={@llm_chain.delta.role == "assistant"} text={@llm_chain.delta.content} />
+            <span :if={@llm_chain.delta.role != "assistant"}>
+              <%= @llm_chain.delta.content %>
+            </span>
+          <% else %>
+            <%= @response %>
+          <% end %>
         </div>
       </div>
     </section>
