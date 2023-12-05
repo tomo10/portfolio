@@ -5,6 +5,7 @@ defmodule PortfolioWeb.LandingPageLive do
   alias LangChain.Message
   alias LangChain.MessageDelta
   alias Phoenix.LiveView.AsyncResult
+  alias Portfolio.Messages
   alias PortfolioWeb.CustomComponents, as: CC
 
   @tomo_info "
@@ -54,7 +55,8 @@ defmodule PortfolioWeb.LandingPageLive do
       |> assign(:async_result, %AsyncResult{})
       |> assign(:form, to_form(form_params))
       |> assign(:response, nil)
-      |> assign_llm_chain("How old are you?")
+      |> assign(:messages, [%{role: "user", content: "How old are you?"}])
+      |> assign_llm_chain()
 
     {:ok, socket}
   end
@@ -78,11 +80,13 @@ defmodule PortfolioWeb.LandingPageLive do
 
   @impl true
   def handle_event("submit", %{"question" => question}, socket) do
-    # ask_aida(question, lv_pid)
+    messages = socket.assigns.messages ++ [%{role: "user", content: question}]
+
     socket =
       socket
       |> assign(:question, question)
-      |> assign_llm_chain(question)
+      |> assign(:messages, messages)
+      |> assign_llm_chain()
       |> run_chain()
 
     {:noreply, socket}
@@ -142,8 +146,9 @@ defmodule PortfolioWeb.LandingPageLive do
     {:noreply, socket}
   end
 
-  # user question will need to be passed in later
-  defp assign_llm_chain(socket, question) do
+  defp assign_llm_chain(socket) do
+    messages = Messages.messages_to_langchain_messages(socket.assigns.messages)
+
     llm_chain =
       LLMChain.new!(%{
         llm:
@@ -154,9 +159,9 @@ defmodule PortfolioWeb.LandingPageLive do
         verbose: false
       })
       |> LLMChain.add_messages([
-        Message.new_system!(@tomo_info <> @tomo_cv),
-        Message.new_user!(question)
+        Message.new_system!(@tomo_info <> @tomo_cv)
       ])
+      |> LLMChain.add_messages(messages)
 
     assign(socket, :llm_chain, llm_chain)
   end
