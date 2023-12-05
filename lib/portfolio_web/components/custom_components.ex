@@ -91,7 +91,7 @@ defmodule PortfolioWeb.CustomComponents do
 
         <div
           :if={@llm_chain.delta || @response}
-          class="p-5 mt-10 dark:text-white border-gray-200 rounded-lg dark:bg-slate-800 text-semibold"
+          class="p-5 mt-10 dark:text-primary border-gray-200 rounded-lg dark:bg-slate-800 text-semibold"
         >
           <%= if @llm_chain.delta do %>
             <.markdown :if={@llm_chain.delta.role == "assistant"} text={@llm_chain.delta.content} />
