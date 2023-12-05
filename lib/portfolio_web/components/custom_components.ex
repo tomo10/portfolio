@@ -151,21 +151,21 @@ defmodule PortfolioWeb.CustomComponents do
     ~H"""
     <section
       id="projects"
-      class="relative z-10 py-16 text-center transition duration-500 ease-in-out bg-white md:py-32 dark:bg-gray-900 dark:text-white"
+      class="relative z-10 py-16 text-center  bg-white md:py-32 dark:bg-gray-900 dark:text-white"
     >
       <.container max_width={@max_width} class="relative z-10">
-        <div class="mx-auto mb-16 md:mb-20 lg:w-7/12 stagger-fade-in-animation">
-          <div class="mb-5 text-3xl font-bold md:mb-7 md:text-5xl fade-in-animation">
+        <div class="mx-auto mb-16 md:mb-20 lg:w-7/12 ">
+          <div class="mb-5 text-3xl font-bold md:mb-7 md:text-5xl ">
             <%= @title %>
           </div>
-          <div class="text-lg font-light anim md:text-2xl fade-in-animation">
+          <div class="text-lg font-light anim md:text-2xl ">
             <%= @description %>
           </div>
         </div>
 
-        <div class={["grid stagger-fade-in-animation gap-y-8", @grid_classes]}>
+        <div class={["grid  gap-y-8", @grid_classes]}>
           <%= for feature <- @features do %>
-            <div class="px-8 mb-10 border-gray-200 md:px-16 fade-in-animation last:border-0">
+            <div class="px-8 mb-10 border-gray-200 md:px-16  last:border-0">
               <div class="flex justify-center mb-4 md:mb-6">
                 <span class="flex items-center justify-center w-12 h-12 rounded-md bg-primary-600">
                   <.icon name={feature.icon} class="w-6 h-6 text-white" />
