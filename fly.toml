@@ -4,7 +4,7 @@
 #
 
 app = "dark-snow-1832"
-primary_region = "lhr"
+primary_region = "ord"
 kill_signal = "SIGTERM"
 swap_size_mb = 512
 
