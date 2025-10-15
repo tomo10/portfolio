@@ -28,7 +28,7 @@ defmodule PortfolioWeb.LandingPageLive do
     Profile
     Passionate software engineer open to full stack or backend roles using Elixir. Experience in startup and corporate environments as well as previous work in the London insurance market, where I started programming. Here I learned Python and the quantitative and analytical skills that transferred well into the software engineering industry
     Employment History
-    Role: Elixir Full Stack Engineer, Vibrant Planet, May 2024 - June 2025
+    Role: Elixir Full Stack Engineer, Vibrant Planet, May 2024 - July 2025
     Vibrant Planet is a climate technology company working on wildfire resilience in the USA. Working as a full stack Elixir engineer there working in a geospatial data heavy environment.
     Role: Elixir Full Stack Engineer, Independent, Feb 2023 - Jan 2024
     Various freelance projects using the PETAL stack. Currently working on a greenfield webs application for an events company using Phoenix LiveView and Elixir - its in beta.
