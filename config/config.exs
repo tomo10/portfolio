@@ -20,14 +20,14 @@ import Config
 #   - github_url: (deletable) The URL to your Github account (used in the landing page footer)
 #   - discord_url: (deletable) The URL to your Discord invititation (used in the landing page footer)
 config :portfolio,
-  app_name: "THCE Portfolio",
+  app_name: "T Edwards",
   business_name: "Thomas Edwards Dev",
   support_email: "thce28@gmail.com",
   mailer_default_from_name: "Contact",
   mailer_default_from_email: "thce28@gmail.com",
   logo_url_for_emails: "",
   seo_description:
-    "Portfolio website and contact information for Thomas Edwards full stack developer",
+    "Portfolio website and contact information for Thomas Edwards Full Stack developer",
   github_url: "https://github.com/tomo10"
 
 # Petal Pro features:
